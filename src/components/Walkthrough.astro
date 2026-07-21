@@ -1,0 +1,466 @@
+---
+// Four screens of a single Learnist session, in the order you meet them.
+// `shot` maps to a file in public/product.
+const steps = [
+    {
+        num: "01",
+        tab: "Path",
+        title: "Sequenced, not searched",
+        body: "Pick a topic and get an ordered set of lessons. No tab graveyard, no deciding what comes next.",
+        shot: "step-path",
+        alt: "A tRPC on Express topic in Learnist, showing five numbered lessons in order.",
+    },
+    {
+        num: "02",
+        tab: "See it",
+        title: "The shape before the syntax",
+        body: "Tables and diagrams that show how the pieces talk. You understand the system before you touch a file.",
+        shot: "step-see",
+        alt: "A layer responsibility table above a sequence diagram tracing a request through context, middleware, and handler.",
+    },
+    {
+        num: "03",
+        tab: "Build",
+        title: "You write it, not the model",
+        body: "A spec with real parts to implement. It tells you what to build and stays quiet about how.",
+        shot: "step-build",
+        alt: "A challenge brief in Learnist listing implementation steps across three parts.",
+    },
+    {
+        num: "04",
+        tab: "Prove",
+        title: "Wrong answers get explained",
+        body: "Retrieval questions the moment you finish. Miss one and it tells you why, then makes you go again.",
+        shot: "step-prove",
+        alt: "A retrieval practice quiz with a wrong answer marked in red and an explanation below it.",
+    },
+];
+---
+
+<section class="walk" id="walkthrough">
+    <header class="walk-head">
+        <p class="eyebrow">The product</p>
+        <h1 class="walk-title">
+            One hour. Four moves.<br />
+            Nothing you can't <em>explain</em>
+        </h1>
+        <p class="walk-sub">
+            These are real screens, not mockups. Walk a path, read the diagram,
+            write the code, then defend it out loud.
+        </p>
+    </header>
+
+    <div class="walk-stage">
+        <div class="tabs" role="tablist" aria-label="Steps in a Learnist session">
+            {
+                steps.map((step, i) => (
+                    <button
+                        class:list={["tab", i === 0 && "is-active"]}
+                        role="tab"
+                        type="button"
+                        id={`walk-tab-${i}`}
+                        aria-controls={`walk-panel-${i}`}
+                        aria-selected={i === 0 ? "true" : "false"}
+                        tabindex={i === 0 ? 0 : -1}
+                    >
+                        <span class="tab-num">{step.num}</span>
+                        <span class="tab-label">{step.tab}</span>
+                    </button>
+                ))
+            }
+        </div>
+
+        {
+            steps.map((step, i) => (
+                <div
+                    class:list={["panel", i === 0 && "is-active"]}
+                    role="tabpanel"
+                    id={`walk-panel-${i}`}
+                    aria-labelledby={`walk-tab-${i}`}
+                    hidden={i !== 0}
+                >
+                    <div class="panel-copy">
+                        <h2 class="panel-title">{step.title}</h2>
+                        <p class="panel-body">{step.body}</p>
+                    </div>
+
+                    <figure class="frame">
+                        <div class="frame-bar" aria-hidden="true">
+                            <span class="dots">
+                                <i />
+                                <i />
+                                <i />
+                            </span>
+                            <span class="frame-url">learnist.app</span>
+                        </div>
+                        <div class="frame-shot">
+                            <img
+                                src={`/product/${step.shot}.png`}
+                                alt={step.alt}
+                                width="1200"
+                                height="699"
+                                loading={i === 0 ? "eager" : "lazy"}
+                                decoding="async"
+                            />
+                        </div>
+                    </figure>
+                </div>
+            ))
+        }
+    </div>
+
+    <div class="walk-cta">
+        <a class="btn btn-solid" href="#signup">Get for lifetime</a>
+        <a class="btn btn-ghost" href="/pricing">See what's included</a>
+    </div>
+</section>
+
+<script>
+    // Roving tabindex: one tab in the tab order, arrows move between the rest.
+    document.querySelectorAll<HTMLElement>(".walk-stage").forEach((stage) => {
+        const tabs = [...stage.querySelectorAll<HTMLButtonElement>(".tab")];
+        const panels = [...stage.querySelectorAll<HTMLElement>(".panel")];
+        if (!tabs.length) return;
+
+        const select = (next: number, focus = false) => {
+            tabs.forEach((tab, i) => {
+                const on = i === next;
+                tab.classList.toggle("is-active", on);
+                tab.setAttribute("aria-selected", String(on));
+                tab.tabIndex = on ? 0 : -1;
+                panels[i]?.classList.toggle("is-active", on);
+                if (panels[i]) panels[i].hidden = !on;
+            });
+            if (focus) tabs[next].focus();
+        };
+
+        tabs.forEach((tab, i) => {
+            tab.addEventListener("click", () => select(i));
+            tab.addEventListener("keydown", (event) => {
+                const step =
+                    event.key === "ArrowRight" || event.key === "ArrowDown"
+                        ? 1
+                        : event.key === "ArrowLeft" || event.key === "ArrowUp"
+                          ? -1
+                          : 0;
+                if (step) {
+                    event.preventDefault();
+                    select((i + step + tabs.length) % tabs.length, true);
+                } else if (event.key === "Home") {
+                    event.preventDefault();
+                    select(0, true);
+                } else if (event.key === "End") {
+                    event.preventDefault();
+                    select(tabs.length - 1, true);
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    .walk {
+        position: relative;
+        z-index: 2;
+        padding: 2.5rem 0 4.5rem;
+        color: var(--ink);
+    }
+
+    /* ---------- Head ---------- */
+
+    .walk-head {
+        max-width: 40rem;
+    }
+
+    .eyebrow {
+        margin: 0 0 0.9rem;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+    }
+
+    .walk-title {
+        margin: 0;
+        font-size: clamp(2rem, 4.8vw, 3.15rem);
+        line-height: 1.07;
+        letter-spacing: -0.035em;
+        font-weight: 650;
+    }
+
+    .walk-title em {
+        font-family: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+        font-style: italic;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+    }
+
+    .walk-sub {
+        margin: 1rem 0 0;
+        font-size: 1rem;
+        line-height: 1.55;
+        color: var(--muted);
+        max-width: 42ch;
+        text-wrap: pretty;
+    }
+
+    /* ---------- Stage ---------- */
+
+    .walk-stage {
+        margin-top: 2.5rem;
+    }
+
+    .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .tab {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        padding: 0.6rem 1.1rem;
+        border: 1px solid var(--rule);
+        border-radius: 999px;
+        background: #fff;
+        color: var(--muted);
+        font: inherit;
+        font-size: 0.9rem;
+        font-weight: 550;
+        letter-spacing: -0.01em;
+        cursor: pointer;
+        transition:
+            background-color 0.15s ease,
+            border-color 0.15s ease,
+            color 0.15s ease,
+            box-shadow 0.15s ease;
+    }
+
+    .tab:hover {
+        color: var(--ink);
+        border-color: #d3cfc9;
+    }
+
+    .tab:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+    }
+
+    .tab-num {
+        font-size: 0.7rem;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+        opacity: 0.6;
+    }
+
+    .tab.is-active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+        box-shadow:
+            0 1px 2px rgb(0 0 255 / 0.28),
+            0 12px 24px -14px rgb(0 0 255 / 0.6);
+    }
+
+    .tab.is-active .tab-num {
+        opacity: 0.75;
+    }
+
+    /* ---------- Panel ---------- */
+
+    .panel {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr);
+        align-items: start;
+        gap: 1.75rem 2.75rem;
+        margin-top: 2rem;
+    }
+
+    /* `display: grid` above would otherwise beat the UA's [hidden] rule and
+       leave every panel stacked on the page. */
+    .panel[hidden] {
+        display: none;
+    }
+
+    /* Switching tabs replaces the whole panel, so fade it in rather than
+       letting the new screenshot snap into place. */
+    .panel.is-active {
+        animation: panel-in 0.28s ease both;
+    }
+
+    @keyframes panel-in {
+        from {
+            opacity: 0;
+            transform: translateY(6px);
+        }
+    }
+
+    .panel-copy {
+        position: sticky;
+        top: 2rem;
+    }
+
+    .panel-title {
+        margin: 0;
+        font-size: clamp(1.15rem, 2vw, 1.5rem);
+        line-height: 1.2;
+        letter-spacing: -0.025em;
+        font-weight: 650;
+        text-wrap: balance;
+    }
+
+    .panel-body {
+        margin: 0.6rem 0 0;
+        font-size: 0.9rem;
+        line-height: 1.55;
+        color: var(--muted);
+        text-wrap: pretty;
+    }
+
+    /* ---------- Browser frame ---------- */
+
+    .frame {
+        margin: 0;
+        border: 1px solid var(--rule);
+        border-radius: var(--radius);
+        background: #fff;
+        overflow: hidden;
+        box-shadow:
+            0 1px 2px rgb(20 17 15 / 0.05),
+            0 24px 48px -32px rgb(20 17 15 / 0.35);
+    }
+
+    .frame-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.55rem 0.75rem;
+        border-bottom: 1px solid var(--rule);
+        background: var(--surface);
+    }
+
+    .dots {
+        display: flex;
+        gap: 5px;
+    }
+
+    .dots i {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #d6d2cc;
+    }
+
+    .frame-url {
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 0.68rem;
+        color: #a19b94;
+    }
+
+    /* Screenshots are ~750x437 through 1200x699 — same ratio, so one box fits
+       all four and tab switches never shift the page. */
+    .frame-shot {
+        aspect-ratio: 750 / 437;
+        background: var(--surface);
+    }
+
+    .frame-shot img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+    }
+
+    /* ---------- CTA ---------- */
+
+    .walk-cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 3rem;
+        padding-top: 2.25rem;
+        border-top: 1px solid var(--rule);
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.3rem;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        font-weight: 550;
+        letter-spacing: -0.005em;
+        text-decoration: none;
+        white-space: nowrap;
+        transition:
+            background-color 0.15s ease,
+            border-color 0.15s ease,
+            box-shadow 0.15s ease,
+            transform 0.1s ease;
+    }
+
+    .btn:active {
+        transform: translateY(1px);
+    }
+
+    .btn:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+    }
+
+    .btn-solid {
+        background: var(--accent);
+        color: #fff;
+        box-shadow:
+            0 1px 2px rgb(0 0 255 / 0.28),
+            0 12px 24px -12px rgb(0 0 255 / 0.55);
+    }
+
+    .btn-solid:hover {
+        background: var(--accent-hover);
+    }
+
+    .btn-ghost {
+        background: #fff;
+        color: var(--ink);
+        border: 1px solid var(--rule);
+        box-shadow: 0 1px 2px rgb(20 17 15 / 0.05);
+    }
+
+    .btn-ghost:hover {
+        border-color: #d3cfc9;
+        box-shadow: 0 2px 6px rgb(20 17 15 / 0.08);
+    }
+
+    /* ---------- Responsive ---------- */
+
+    @media (max-width: 860px) {
+        .walk {
+            padding-bottom: 3.25rem;
+        }
+
+        .panel {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 1.25rem;
+        }
+
+        .panel-copy {
+            position: static;
+        }
+
+        .tab {
+            padding: 0.55rem 0.9rem;
+            font-size: 0.85rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .panel.is-active {
+            animation: none;
+        }
+    }
+</style>

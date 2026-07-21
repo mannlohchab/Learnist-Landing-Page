@@ -1,0 +1,697 @@
+---
+const features = [
+	"Full learning system for one person",
+	"Lifetime product updates",
+	"Private workspace for lessons and labs",
+	"Works across AI IDEs and CLIs",
+	"Coaching that refuses to hand you answers",
+	"Progress that lives in your git history",
+];
+---
+
+<section class="pricing" aria-labelledby="pricing-heading">
+	<header class="pricing-intro">
+		<p class="pricing-tag">Pricing</p>
+		<h1 id="pricing-heading" class="pricing-title">
+			One seat. Lifetime access.
+		</h1>
+		<p class="pricing-lead">
+			Stop overpaying for courses you never finish. One payment covers the
+			whole system.
+		</p>
+	</header>
+
+	<article class="plan" data-currency="inr">
+		<div class="plan-story">
+			<div class="plan-brand">
+				<img
+					class="plan-mark"
+					src="/learnist.webp"
+					alt=""
+					width="36"
+					height="36"
+				/>
+				<span class="plan-brand-name">Learnist</span>
+			</div>
+
+			<div class="plan-pitch">
+				<h2 class="plan-pitch-title">
+					Stop overpaying for courses you never finish.
+				</h2>
+				<p class="plan-pitch-body">
+					One lifetime seat covers the whole system. No monthly drip.
+					No classroom lock-in.
+				</p>
+			</div>
+
+			<aside class="plan-why">
+				<p class="plan-why-title">
+					<span class="plan-why-icon" aria-hidden="true">
+						<svg viewBox="0 0 16 16" fill="none">
+							<circle
+								cx="8"
+								cy="8"
+								r="6.25"
+								stroke="currentColor"
+								stroke-width="1.4"></circle>
+							<path
+								d="M8 7.2V11"
+								stroke="currentColor"
+								stroke-width="1.4"
+								stroke-linecap="round"></path>
+							<circle cx="8" cy="5.1" r="0.85" fill="currentColor"
+							></circle>
+						</svg>
+					</span>
+					Why this plan?
+				</p>
+				<p class="plan-why-body">
+					Built for people with a day job. It fits your evenings, lives
+					in your editor, and compounds over years, not a subscription
+					that bills whether you show up or not.
+				</p>
+			</aside>
+		</div>
+
+		<div class="plan-offer">
+			<div class="plan-highlight">
+				<p class="plan-label">Lifetime</p>
+				<h2 class="plan-name">Lifetime seat</h2>
+				<p class="plan-tagline">One person. Forever.</p>
+
+				<div
+					class="currency"
+					role="group"
+					aria-label="Currency"
+				>
+					<button
+						type="button"
+						class="currency-btn"
+						data-currency-btn="usd"
+						aria-pressed="false"
+					>
+						USD
+					</button>
+					<button
+						type="button"
+						class="currency-btn is-active"
+						data-currency-btn="inr"
+						aria-pressed="true"
+					>
+						INR
+					</button>
+				</div>
+
+				<div class="plan-price" aria-live="polite">
+					<p class="plan-price-main" data-price-main>₹5,784</p>
+					<p class="plan-price-alt" data-price-alt>or $60 · one-time</p>
+				</div>
+			</div>
+
+			<ul class="plan-features">
+				{
+					features.map((feature) => (
+						<li>
+							<span class="check" aria-hidden="true">
+								<svg viewBox="0 0 16 16" fill="none">
+									<path
+										d="M3.5 8.2L6.4 11.1L12.5 4.9"
+										stroke="currentColor"
+										stroke-width="1.7"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									/>
+								</svg>
+							</span>
+							{feature}
+						</li>
+					))
+				}
+			</ul>
+
+			<div class="plan-actions">
+				<a class="plan-btn plan-btn-ghost" href="#faq">Read FAQ</a>
+				<a class="plan-btn plan-btn-solid" href="#buy">
+					Buy lifetime
+					<svg
+						class="plan-btn-arrow"
+						viewBox="0 0 16 16"
+						aria-hidden="true"
+					>
+						<path
+							d="M3.5 8H12.5M9 4.5L12.5 8L9 11.5"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.6"
+							stroke-linecap="round"
+							stroke-linejoin="round"></path>
+					</svg>
+				</a>
+			</div>
+
+			<p class="plan-note">
+				You bring your own AI subscription. Learnist is the system that
+				runs on top of it.
+			</p>
+		</div>
+	</article>
+</section>
+
+<style>
+	.pricing {
+		--ink: #14110f;
+		--muted: #5f5a55;
+		--surface: #f7f6f4;
+		--rule: #e6e3df;
+		--accent: #0000ff;
+		--accent-hover: #0000dd;
+		--accent-soft: #eef0ff;
+		--panel: #f3f5f8;
+
+		position: relative;
+		z-index: 2;
+		padding: 2.5rem 0 3.25rem;
+		color: var(--ink);
+	}
+
+	.pricing-intro {
+		max-width: 34rem;
+		margin: 0 auto 2.25rem;
+		text-align: center;
+	}
+
+	.pricing-tag {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+
+	.pricing-title {
+		margin: 0.65rem 0 0;
+		font-size: clamp(1.85rem, 4vw, 2.6rem);
+		line-height: 1.08;
+		letter-spacing: -0.035em;
+		font-weight: 650;
+		text-wrap: balance;
+	}
+
+	.pricing-lead {
+		margin: 0.85rem 0 0;
+		font-size: 1rem;
+		line-height: 1.55;
+		color: var(--muted);
+		text-wrap: pretty;
+	}
+
+	/* ---------- Plan card ---------- */
+
+	.plan {
+		display: grid;
+		grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+		overflow: hidden;
+		border-radius: 22px;
+		background: #fff;
+		box-shadow:
+			0 1px 2px rgb(20 17 15 / 0.05),
+			0 24px 48px -28px rgb(20 17 15 / 0.28);
+		animation: plan-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	@keyframes plan-rise {
+		from {
+			opacity: 0;
+			transform: translateY(14px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.plan-story {
+		display: flex;
+		flex-direction: column;
+		gap: 1.35rem;
+		padding: 1.6rem;
+		background: var(--panel);
+	}
+
+	.plan-brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.plan-mark {
+		display: block;
+		width: 2rem;
+		height: 2rem;
+		object-fit: contain;
+	}
+
+	.plan-brand-name {
+		font-size: 1.05rem;
+		font-weight: 650;
+		letter-spacing: -0.02em;
+	}
+
+	.plan-pitch {
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
+		padding: 1.35rem 1.4rem 1.45rem;
+		border-radius: 16px;
+		background:
+			radial-gradient(
+				ellipse 70% 65% at 72% 38%,
+				rgb(255 255 255 / 0.92) 0%,
+				transparent 58%
+			),
+			radial-gradient(
+				ellipse 80% 70% at 8% 12%,
+				rgb(186 240 210 / 0.85) 0%,
+				transparent 55%
+			),
+			radial-gradient(
+				ellipse 75% 70% at 12% 88%,
+				rgb(72 180 175 / 0.55) 0%,
+				transparent 58%
+			),
+			radial-gradient(
+				ellipse 70% 65% at 92% 82%,
+				rgb(140 220 230 / 0.7) 0%,
+				transparent 55%
+			),
+			radial-gradient(
+				ellipse 55% 50% at 88% 18%,
+				rgb(190 225 240 / 0.65) 0%,
+				transparent 55%
+			),
+			linear-gradient(145deg, #d8f5e4 0%, #e8f7f4 40%, #dceef8 100%);
+		animation: plan-rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+	}
+
+	.plan-pitch::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: radial-gradient(
+			ellipse 50% 45% at 55% 45%,
+			rgb(255 255 255 / 0.55),
+			transparent 70%
+		);
+		pointer-events: none;
+	}
+
+	.plan-pitch-title {
+		margin: 0;
+		font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+		line-height: 1.18;
+		letter-spacing: -0.03em;
+		font-weight: 700;
+		text-wrap: balance;
+	}
+
+	.plan-pitch-body {
+		margin: 0.7rem 0 0;
+		font-size: 0.92rem;
+		line-height: 1.5;
+		color: var(--muted);
+		text-wrap: pretty;
+	}
+
+	.plan-why {
+		margin-top: auto;
+		padding: 1.15rem 1.2rem 1.25rem;
+		border: 1px solid rgb(20 17 15 / 0.1);
+		border-radius: 14px;
+		background: #fff;
+		animation: plan-rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+	}
+
+	.plan-why-title {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		margin: 0;
+		font-size: 0.92rem;
+		font-weight: 650;
+		letter-spacing: -0.01em;
+	}
+
+	.plan-why-icon {
+		display: inline-flex;
+		color: var(--accent);
+	}
+
+	.plan-why-icon svg {
+		width: 1rem;
+		height: 1rem;
+	}
+
+	.plan-why-body {
+		margin: 0.55rem 0 0;
+		font-size: 0.875rem;
+		line-height: 1.55;
+		color: var(--muted);
+		text-wrap: pretty;
+	}
+
+	/* ---------- Offer column ---------- */
+
+	.plan-offer {
+		display: flex;
+		flex-direction: column;
+		padding: 1.15rem 1.15rem 1.4rem;
+		animation: plan-rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+	}
+
+	/*
+	 * Soft mesh wash from the Legendary card ref — peach / coral / lavender
+	 * blobs, kept light so the price stays the focus.
+	 */
+	.plan-highlight {
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
+		padding: 1.35rem 1.25rem 1.4rem;
+		border-radius: 18px;
+		background:
+			radial-gradient(
+				ellipse 90% 80% at 88% 8%,
+				rgb(196 168 255 / 0.55) 0%,
+				transparent 55%
+			),
+			radial-gradient(
+				ellipse 75% 70% at 12% 18%,
+				rgb(255 176 168 / 0.7) 0%,
+				transparent 58%
+			),
+			radial-gradient(
+				ellipse 70% 65% at 55% 92%,
+				rgb(255 210 170 / 0.65) 0%,
+				transparent 60%
+			),
+			radial-gradient(
+				ellipse 60% 55% at 72% 48%,
+				rgb(255 196 210 / 0.45) 0%,
+				transparent 55%
+			),
+			linear-gradient(160deg, #ffe8e2 0%, #fff0ea 42%, #f3e8ff 100%);
+	}
+
+	.plan-highlight::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: radial-gradient(
+			ellipse 55% 45% at 40% 35%,
+			rgb(255 255 255 / 0.45),
+			transparent 70%
+		);
+		pointer-events: none;
+	}
+
+	.plan-label {
+		margin: 0;
+		font-size: 0.7rem;
+		font-weight: 650;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+
+	.plan-name {
+		margin: 0.35rem 0 0;
+		font-size: clamp(1.55rem, 2.6vw, 1.85rem);
+		line-height: 1.1;
+		letter-spacing: -0.03em;
+		font-weight: 700;
+	}
+
+	.plan-tagline {
+		margin: 0.35rem 0 0;
+		font-size: 0.95rem;
+		color: var(--muted);
+	}
+
+	.currency {
+		display: inline-flex;
+		align-self: flex-start;
+		gap: 0.15rem;
+		margin-top: 1.15rem;
+		padding: 0.2rem;
+		border-radius: 999px;
+		background: rgb(255 255 255 / 0.72);
+		box-shadow: 0 1px 2px rgb(20 17 15 / 0.05);
+	}
+
+	.currency-btn {
+		border: 0;
+		padding: 0.35rem 0.85rem;
+		border-radius: 999px;
+		background: transparent;
+		color: var(--muted);
+		font: inherit;
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		cursor: pointer;
+		transition:
+			background-color 0.18s ease,
+			color 0.18s ease,
+			box-shadow 0.18s ease;
+	}
+
+	.currency-btn.is-active {
+		background: #fff;
+		color: var(--ink);
+		box-shadow: 0 1px 2px rgb(20 17 15 / 0.08);
+	}
+
+	.currency-btn:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+
+	.plan-price {
+		margin-top: 1rem;
+	}
+
+	.plan-price-main {
+		margin: 0;
+		font-size: clamp(2.4rem, 5vw, 3.15rem);
+		line-height: 1;
+		letter-spacing: -0.04em;
+		font-weight: 700;
+		transition: opacity 0.18s ease;
+	}
+
+	.plan-price-alt {
+		margin: 0.45rem 0 0;
+		font-size: 0.9rem;
+		color: var(--muted);
+		transition: opacity 0.18s ease;
+	}
+
+	.plan.is-switching .plan-price-main,
+	.plan.is-switching .plan-price-alt {
+		opacity: 0.35;
+	}
+
+	.plan-features {
+		display: flex;
+		flex-direction: column;
+		gap: 0.72rem;
+		margin: 1.15rem 0.35rem 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.plan-features li {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.65rem;
+		font-size: 0.92rem;
+		line-height: 1.4;
+		letter-spacing: -0.01em;
+	}
+
+	.check {
+		display: inline-flex;
+		flex-shrink: 0;
+		margin-top: 0.12rem;
+		color: var(--accent);
+	}
+
+	.check svg {
+		width: 1rem;
+		height: 1rem;
+	}
+
+	.plan-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.65rem;
+		margin: 1.45rem 0.35rem 0;
+	}
+
+	.plan-btn {
+		flex: 1 1 auto;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.4rem;
+		min-height: 2.75rem;
+		padding: 0.7rem 1.15rem;
+		border-radius: 12px;
+		font-size: 0.92rem;
+		font-weight: 550;
+		letter-spacing: -0.01em;
+		text-decoration: none;
+		white-space: nowrap;
+		transition:
+			background-color 0.15s ease,
+			border-color 0.15s ease,
+			box-shadow 0.15s ease,
+			transform 0.1s ease;
+	}
+
+	.plan-btn:active {
+		transform: translateY(1px);
+	}
+
+	.plan-btn:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+
+	.plan-btn-ghost {
+		color: var(--ink);
+		background: #fff;
+		border: 1px solid var(--rule);
+		box-shadow: 0 1px 2px rgb(20 17 15 / 0.04);
+	}
+
+	.plan-btn-ghost:hover {
+		border-color: #d3cfc9;
+		box-shadow: 0 2px 6px rgb(20 17 15 / 0.08);
+	}
+
+	.plan-btn-solid {
+		color: #fff;
+		background: var(--accent);
+		box-shadow:
+			0 1px 2px rgb(0 0 255 / 0.28),
+			0 12px 24px -12px rgb(0 0 255 / 0.55);
+	}
+
+	.plan-btn-solid:hover {
+		background: var(--accent-hover);
+	}
+
+	.plan-btn-arrow {
+		width: 0.95rem;
+		height: 0.95rem;
+	}
+
+	.plan-note {
+		margin: 1.15rem 0.35rem 0;
+		font-size: 0.8rem;
+		line-height: 1.45;
+		color: #8a847c;
+		text-wrap: pretty;
+	}
+
+	@media (max-width: 860px) {
+		.pricing {
+			padding: 1.75rem 0 2.5rem;
+		}
+
+		.pricing-intro {
+			margin-bottom: 1.6rem;
+			text-align: left;
+		}
+
+		.plan {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.plan-story {
+			padding: 1.25rem;
+		}
+
+		.plan-offer {
+			padding: 1rem 1rem 1.25rem;
+		}
+
+		.plan-highlight {
+			padding: 1.2rem 1.1rem 1.25rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.plan,
+		.plan-pitch,
+		.plan-why,
+		.plan-offer {
+			animation: none;
+		}
+
+		.currency-btn,
+		.plan-price-main,
+		.plan-price-alt,
+		.plan-btn {
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	const prices = {
+		inr: { main: "₹5,784", alt: "or $60 · one-time" },
+		usd: { main: "$60", alt: "or ₹5,784 · one-time" },
+	} as const;
+
+	type Currency = keyof typeof prices;
+
+	const plan = document.querySelector<HTMLElement>(".plan");
+	if (plan) {
+		const main = plan.querySelector<HTMLElement>("[data-price-main]");
+		const alt = plan.querySelector<HTMLElement>("[data-price-alt]");
+		const buttons = plan.querySelectorAll<HTMLButtonElement>(
+			"[data-currency-btn]",
+		);
+
+		function setCurrency(currency: Currency) {
+			if (!plan || !main || !alt) return;
+
+			plan.classList.add("is-switching");
+			plan.dataset.currency = currency;
+
+			window.setTimeout(() => {
+				main.textContent = prices[currency].main;
+				alt.textContent = prices[currency].alt;
+				plan.classList.remove("is-switching");
+			}, 120);
+
+			buttons.forEach((btn) => {
+				const active = btn.dataset.currencyBtn === currency;
+				btn.classList.toggle("is-active", active);
+				btn.setAttribute("aria-pressed", active ? "true" : "false");
+			});
+		}
+
+		buttons.forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const next = btn.dataset.currencyBtn as Currency | undefined;
+				if (next && next in prices) setCurrency(next);
+			});
+		});
+	}
+</script>

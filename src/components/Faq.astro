@@ -1,0 +1,436 @@
+---
+const faqs = [
+	{
+		q: "Is this just another course?",
+		a: "No. Nothing is pre-recorded. Lessons are short, labs are real code, and Learnist won't hand you answers.",
+	},
+	{
+		q: "Do I need my own AI subscription?",
+		a: "Yes. Learnist is the framework; it runs on Cursor, Claude, Codex, or whatever you already pay for.",
+	},
+	{
+		q: "What if my tool isn't supported?",
+		a: "One prompt converts the skills to your editor or CLI. No setup work on you.",
+	},
+	{
+		q: "How long is setup?",
+		a: "One prompt. Deps, git, private remote, and profile are scaffolded for you.",
+	},
+	{
+		q: "Will this actually work for me?",
+		a: "Only if you show up. It adapts to your level and keeps you hooked, but there's no cure for discipline.",
+	},
+	{
+		q: "Who's the lifetime seat for?",
+		a: "One person, your own machines. Team or classroom use needs a seat each.",
+	},
+	{
+		q: "Is learning private?",
+		a: "Yes. Lessons, labs, and your profile stay in your own workspace and git history.",
+	},
+];
+---
+
+<section class="faq" id="faq" aria-labelledby="faq-heading">
+	<header class="faq-intro">
+		<p class="faq-tag">FAQ</p>
+		<h2 id="faq-heading" class="faq-title">
+			Frequently asked questions
+		</h2>
+		<p class="faq-lead">
+			Quick answers before you buy. Still stuck? Reach out and we'll help.
+		</p>
+	</header>
+
+	<div class="faq-panel">
+		<div class="faq-layout">
+			<aside class="faq-contact">
+				<p class="faq-contact-title">Still have questions?</p>
+				<p class="faq-contact-body">
+					Can't find the answer to your question? Send us an email and
+					we'll get back to you as soon as possible!
+				</p>
+				<a class="faq-contact-btn" href="mailto:hello@learnist.dev">
+					Send email
+					<svg
+						class="faq-contact-arrow"
+						viewBox="0 0 16 16"
+						aria-hidden="true"
+					>
+						<path
+							d="M3.5 8H12.5M9 4.5L12.5 8L9 11.5"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"></path>
+					</svg>
+				</a>
+			</aside>
+
+			<div class="faq-list" data-faq-list>
+				{
+					faqs.map((item, i) => (
+						<details class="faq-item" open={i === 0}>
+							<summary class="faq-question">
+								<span class="faq-question-text">{item.q}</span>
+								<span class="faq-toggle" aria-hidden="true">
+									<svg viewBox="0 0 12 12" fill="none">
+										<path
+											d="M3 4.5L6 7.5L9 4.5"
+											stroke="currentColor"
+											stroke-width="1.6"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
+								</span>
+							</summary>
+							<p class="faq-answer">{item.a}</p>
+						</details>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.faq {
+		--ink: #14110f;
+		--muted: #5f5a55;
+		--rule: #e6e3df;
+		--accent: #0000ff;
+		--accent-hover: #0000dd;
+		--panel: #f3f5f8;
+
+		position: relative;
+		z-index: 2;
+		padding: 0.5rem 0 4.5rem;
+		color: var(--ink);
+	}
+
+	.faq-intro {
+		max-width: 34rem;
+		margin: 0 auto 2.25rem;
+		text-align: center;
+	}
+
+	.faq-tag {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+
+	.faq-title {
+		margin: 0.65rem 0 0;
+		font-size: clamp(1.85rem, 4vw, 2.6rem);
+		line-height: 1.08;
+		letter-spacing: -0.035em;
+		font-weight: 650;
+		text-wrap: balance;
+	}
+
+	.faq-lead {
+		margin: 0.85rem 0 0;
+		font-size: 1rem;
+		line-height: 1.55;
+		color: var(--muted);
+		text-wrap: pretty;
+	}
+
+	.faq-panel {
+		overflow: hidden;
+		border-radius: 22px;
+		background: #fff;
+		box-shadow:
+			0 1px 2px rgb(20 17 15 / 0.05),
+			0 24px 48px -28px rgb(20 17 15 / 0.28);
+		animation: faq-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	@keyframes faq-rise {
+		from {
+			opacity: 0;
+			transform: translateY(14px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.faq-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+		gap: 1.5rem 2rem;
+		align-items: start;
+		padding: 1.5rem;
+	}
+
+	.faq-contact {
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
+		padding: 1.35rem 1.35rem 1.45rem;
+		border-radius: 16px;
+		background:
+			radial-gradient(
+				ellipse 70% 65% at 72% 38%,
+				rgb(255 255 255 / 0.92) 0%,
+				transparent 58%
+			),
+			radial-gradient(
+				ellipse 80% 70% at 8% 12%,
+				rgb(186 240 210 / 0.85) 0%,
+				transparent 55%
+			),
+			radial-gradient(
+				ellipse 75% 70% at 12% 88%,
+				rgb(72 180 175 / 0.55) 0%,
+				transparent 58%
+			),
+			radial-gradient(
+				ellipse 70% 65% at 92% 82%,
+				rgb(140 220 230 / 0.7) 0%,
+				transparent 55%
+			),
+			radial-gradient(
+				ellipse 55% 50% at 88% 18%,
+				rgb(190 225 240 / 0.65) 0%,
+				transparent 55%
+			),
+			linear-gradient(145deg, #d8f5e4 0%, #e8f7f4 40%, #dceef8 100%);
+	}
+
+	.faq-contact::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: radial-gradient(
+			ellipse 50% 45% at 55% 45%,
+			rgb(255 255 255 / 0.55),
+			transparent 70%
+		);
+		pointer-events: none;
+	}
+
+	.faq-contact-title {
+		margin: 0;
+		font-size: 1.05rem;
+		font-weight: 650;
+		letter-spacing: -0.02em;
+	}
+
+	.faq-contact-body {
+		margin: 0.55rem 0 0;
+		font-size: 0.9rem;
+		line-height: 1.55;
+		color: var(--muted);
+		text-wrap: pretty;
+	}
+
+	.faq-contact-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.4rem;
+		margin-top: 1.15rem;
+		min-height: 2.5rem;
+		padding: 0.55rem 1.15rem 0.55rem 1.25rem;
+		border: 1px solid rgb(255 255 255 / 0.7);
+		border-radius: 12px;
+		background: rgb(255 255 255 / 0.72);
+		color: var(--ink);
+		font-size: 0.88rem;
+		font-weight: 550;
+		letter-spacing: -0.01em;
+		text-decoration: none;
+		backdrop-filter: blur(8px);
+		box-shadow:
+			0 1px 2px rgb(20 17 15 / 0.04),
+			0 8px 20px -12px rgb(40 120 130 / 0.35);
+		transition:
+			background-color 0.18s ease,
+			border-color 0.18s ease,
+			box-shadow 0.18s ease,
+			transform 0.1s ease;
+	}
+
+	.faq-contact-btn:hover {
+		background: #fff;
+		border-color: #fff;
+		box-shadow:
+			0 1px 2px rgb(20 17 15 / 0.06),
+			0 12px 24px -12px rgb(40 120 130 / 0.4);
+	}
+
+	.faq-contact-btn:active {
+		transform: translateY(1px);
+	}
+
+	.faq-contact-btn:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 3px;
+	}
+
+	.faq-contact-arrow {
+		width: 0.9rem;
+		height: 0.9rem;
+		opacity: 0.7;
+		transition:
+			opacity 0.18s ease,
+			transform 0.18s ease;
+	}
+
+	.faq-contact-btn:hover .faq-contact-arrow {
+		opacity: 1;
+		transform: translateX(2px);
+	}
+
+	.faq-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.faq-item {
+		padding: 0.15rem 1.15rem 0.15rem 1.25rem;
+		border-radius: 14px;
+		background: var(--panel);
+		transition: background-color 0.2s ease;
+	}
+
+	.faq-item[open] {
+		padding-bottom: 1.05rem;
+		background: #eceff3;
+	}
+
+	.faq-question {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1.05rem 0;
+		list-style: none;
+		cursor: pointer;
+		user-select: none;
+	}
+
+	.faq-question::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq-question::marker {
+		content: "";
+	}
+
+	.faq-question-text {
+		font-size: 0.98rem;
+		font-weight: 650;
+		letter-spacing: -0.015em;
+		line-height: 1.35;
+	}
+
+	.faq-toggle {
+		display: inline-flex;
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: center;
+		width: 1.35rem;
+		height: 1.35rem;
+		color: var(--accent);
+		transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.faq-toggle svg {
+		width: 0.85rem;
+		height: 0.85rem;
+	}
+
+	.faq-item[open] .faq-toggle {
+		transform: rotate(180deg);
+	}
+
+	.faq-answer {
+		margin: 0;
+		padding-right: 2.5rem;
+		font-size: 0.92rem;
+		line-height: 1.55;
+		color: var(--muted);
+		text-wrap: pretty;
+		animation: faq-reveal 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	@keyframes faq-reveal {
+		from {
+			opacity: 0;
+			transform: translateY(-4px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.faq-question:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+		border-radius: 6px;
+	}
+
+	@media (max-width: 860px) {
+		.faq {
+			padding: 0 0 3.5rem;
+		}
+
+		.faq-intro {
+			margin-bottom: 1.6rem;
+			text-align: left;
+		}
+
+		.faq-layout {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 1.25rem;
+			padding: 1.15rem;
+		}
+
+		.faq-answer {
+			padding-right: 0.25rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.faq-panel,
+		.faq-toggle,
+		.faq-item,
+		.faq-contact-btn,
+		.faq-contact-arrow {
+			animation: none;
+			transition: none;
+		}
+
+		.faq-answer {
+			animation: none;
+		}
+	}
+</style>
+
+<script>
+	const list = document.querySelector<HTMLElement>("[data-faq-list]");
+	if (list) {
+		const items = list.querySelectorAll<HTMLDetailsElement>("details");
+		items.forEach((item) => {
+			item.addEventListener("toggle", () => {
+				if (!item.open) return;
+				items.forEach((other) => {
+					if (other !== item) other.open = false;
+				});
+			});
+		});
+	}
+</script>

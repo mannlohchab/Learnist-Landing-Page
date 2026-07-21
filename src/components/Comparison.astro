@@ -1,0 +1,291 @@
+---
+// Learnist vs. the two things people already spend on. Cell values are either a
+// verdict token (rendered as a mark) or literal text for the cost row.
+const columns = ["Learnist", "Courses", "AI"];
+
+const rows = [
+    { feature: "Adapts as you grow", cells: ["yes", "no", "no"] },
+    { feature: "Byte-sized lessons + labs", cells: ["yes", "partial", "no"] },
+    { feature: "Coaches without copy-paste", cells: ["yes", "no", "no"] },
+    { feature: "Validates your lab code", cells: ["yes", "no", "partial"] },
+    { feature: "Private workspace", cells: ["yes", "no", "partial"] },
+    { feature: "Any AI IDE or CLI", cells: ["yes", "no", "partial"] },
+    { feature: "One-time lifetime price", cells: ["yes", "no", "no"] },
+    {
+        feature: "Cost after year one",
+        cells: ["$0", "Varies", "$240–1,200/yr"],
+        text: true,
+    },
+];
+---
+
+<section class="cmp" aria-labelledby="cmp-heading">
+    <header class="cmp-head">
+        <p class="cmp-tag">The comparison</p>
+        <h2 id="cmp-heading" class="cmp-title">
+            Courses entertain. Chat ships for you.<br />
+            Learnist makes you the one who <em>understands</em>.
+        </h2>
+        <p class="cmp-sub">
+            A decent AI coding setup runs $20–$100 a month, forever. Learnist is
+            $60 once, and works on top of the tool you already pay for.
+        </p>
+    </header>
+
+    <div class="cmp-scroll">
+        <table class="cmp-table">
+            <caption class="sr-only">
+                Learnist compared with video courses and general AI chat tools
+            </caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="col-feature">Feature</th>
+                    {
+                        columns.map((col, i) => (
+                            <th
+                                scope="col"
+                                class:list={["col-plan", { "is-us": i === 0 }]}
+                            >
+                                {col}
+                            </th>
+                        ))
+                    }
+                </tr>
+            </thead>
+
+            <tbody>
+                {
+                    rows.map((row) => (
+                        <tr>
+                            <th scope="row" class="cell-feature">
+                                {row.feature}
+                            </th>
+                            {row.cells.map((cell, i) => (
+                                <td
+                                    class:list={[
+                                        "cell",
+                                        { "is-us": i === 0 },
+                                        !row.text && `is-${cell}`,
+                                    ]}
+                                >
+                                    {row.text ? (
+                                        <span class="cell-text">{cell}</span>
+                                    ) : cell === "yes" ? (
+                                        <>
+                                            <svg
+                                                class="mark"
+                                                viewBox="0 0 16 16"
+                                                fill="none"
+                                                aria-hidden="true"
+                                            >
+                                                <path
+                                                    d="M3.5 8.2 6.4 11.1 12.5 4.9"
+                                                    stroke="currentColor"
+                                                    stroke-width="1.9"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                />
+                                            </svg>
+                                            <span class="sr-only">Yes</span>
+                                        </>
+                                    ) : (
+                                        <span class="cell-word">
+                                            {cell === "partial"
+                                                ? "Partial"
+                                                : "No"}
+                                        </span>
+                                    )}
+                                </td>
+                            ))}
+                        </tr>
+                    ))
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<style>
+    .cmp {
+        position: relative;
+        z-index: 2;
+        padding: 1.5rem 0 4.5rem;
+        color: var(--ink);
+    }
+
+    .cmp-head {
+        margin: 0 0 2.25rem;
+    }
+
+    .cmp-tag {
+        margin: 0;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+    }
+
+    .cmp-title {
+        margin: 0.6rem 0 0;
+        font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        font-weight: 700;
+        text-wrap: balance;
+    }
+
+    .cmp-title em {
+        font-family: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+        font-style: italic;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+    }
+
+    .cmp-sub {
+        margin: 0.85rem 0 0;
+        font-size: 0.95rem;
+        line-height: 1.55;
+        color: var(--muted);
+        max-width: 52ch;
+        text-wrap: pretty;
+    }
+
+    /* ---------- Table ----------
+       One bordered surface like the bento and the fit panel. The Learnist
+       column is the only tinted one, so the eye lands there without any
+       second hue entering the page. */
+
+    .cmp-scroll {
+        overflow-x: auto;
+        border: 1px solid var(--rule);
+        border-radius: var(--radius);
+        background: #fff;
+        box-shadow: 0 1px 3px rgb(20 17 15 / 0.04);
+    }
+
+    .cmp-table {
+        width: 100%;
+        min-width: 34rem;
+        border-collapse: collapse;
+        text-align: left;
+    }
+
+    thead th {
+        padding: 0.9rem 1.1rem;
+        background: var(--surface);
+        border-bottom: 1px solid var(--rule);
+        font-size: 0.68rem;
+        font-weight: 650;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        white-space: nowrap;
+    }
+
+    thead th.is-us {
+        background: var(--accent);
+        color: #fff;
+    }
+
+    .col-feature {
+        width: 38%;
+    }
+
+    .col-plan,
+    .cell {
+        width: 20.66%;
+        text-align: center;
+    }
+
+    tbody tr + tr th,
+    tbody tr + tr td {
+        border-top: 1px solid var(--rule);
+    }
+
+    .cell-feature {
+        padding: 1.05rem 1.1rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        line-height: 1.35;
+    }
+
+    .cell {
+        padding: 1.05rem 1.1rem;
+        vertical-align: middle;
+    }
+
+    /* Tint runs the full height of the Learnist column, header included. */
+    .cell.is-us {
+        background: rgb(0 0 255 / 0.05);
+    }
+
+    .mark {
+        display: inline-block;
+        width: 1.15rem;
+        height: 1.15rem;
+        color: var(--accent);
+    }
+
+    /* "No" and "Partial" are deliberately quiet — the absence is the point,
+       and shouting it with red would fight the accent. */
+    .cell-word {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #b3aca4;
+    }
+
+    .is-partial .cell-word {
+        color: #8a847c;
+    }
+
+    .cell-text {
+        font-size: 0.85rem;
+        font-weight: 550;
+        letter-spacing: -0.01em;
+        color: var(--muted);
+    }
+
+    .cell.is-us .cell-text {
+        font-weight: 650;
+        color: var(--ink);
+    }
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    /* ---------- Responsive ---------- */
+
+    @media (max-width: 860px) {
+        .cmp {
+            padding-bottom: 3.25rem;
+        }
+
+        .cmp-head {
+            margin-bottom: 1.75rem;
+        }
+
+        .cmp-title br {
+            display: none;
+        }
+
+        thead th,
+        .cell-feature,
+        .cell {
+            padding: 0.85rem 0.8rem;
+        }
+    }
+</style>

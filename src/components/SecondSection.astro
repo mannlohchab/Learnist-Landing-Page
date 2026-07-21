@@ -1,0 +1,239 @@
+---
+const problems = [
+    {
+        num: "01",
+        title: "Progress leaks",
+        body: "Learn WebSockets tonight, rebuild the context next week. Nothing compounds.",
+    },
+    {
+        num: "02",
+        title: "The hour disappears",
+        body: "Docs to search to another tab. The free hour is gone before you write a line.",
+    },
+    {
+        num: "03",
+        title: "Weekends reset you",
+        body: "Cram on Saturday, start from zero on Monday. Consistency beats binge sessions.",
+    },
+];
+---
+
+<section class="problem">
+    <div class="problem-panel">
+        <header class="problem-head">
+            <h2 class="problem-title">
+                You're not short on tutorials.<br />
+                You're short on time, and nothing sticks.
+            </h2>
+            <p class="problem-sub">
+                Watching, prompting, and skimming docs is easy. Owning a skill
+                after a full day of work is hard.<br />
+                Learnist exists for that gap.
+            </p>
+        </header>
+
+        <ul class="problem-grid">
+            {
+                problems.map((item) => (
+                    <li class="problem-card">
+                        <span class="problem-num">{item.num}</span>
+                        <h3 class="problem-card-title">{item.title}</h3>
+                        <p class="problem-card-body">{item.body}</p>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <figure class="note">
+            <blockquote class="note-quote">
+                <p class="note-lead">
+                    I built Learnist for myself. New city, offline job, maybe an
+                    hour a day. I didn't want courses, I didn't want to raw-dog
+                    docs for hours, and I definitely didn't want to copy-paste
+                    code I couldn't explain.
+                </p>
+                <p class="note-body">
+                    A week in, something changed. Walking to work, Learnist was
+                    in my ear: what I got right, what I got wrong, the next
+                    challenge. Finish it, get the hit, want the next one. I was
+                    doing lessons at 6am because I wanted to.
+                </p>
+            </blockquote>
+            <figcaption class="note-by">
+                Ram, engineer &amp; creator of Learnist
+            </figcaption>
+        </figure>
+    </div>
+</section>
+
+<style>
+    .problem {
+        position: relative;
+        z-index: 2;
+        padding: 0 0 4rem;
+        color: var(--ink);
+    }
+
+    .problem-panel {
+        overflow: hidden;
+        border-radius: var(--radius);
+        padding: 3.5rem 2rem 3.75rem;
+
+        /*
+         * Artwork is blue at the rim and near-white at the core, but the core
+         * is a fixed slice of the image and the content is taller than it.
+         * This wash extends that white centre so dark text stays readable
+         * while the blue rim survives.
+         */
+        --wash: radial-gradient(
+            ellipse 64% 60% at 50% 50%,
+            rgb(255 255 255 / 0.97) 0%,
+            rgb(255 255 255 / 0.94) 46%,
+            rgb(255 255 255 / 0.72) 66%,
+            rgb(255 255 255 / 0) 80%
+        );
+
+        background:
+            var(--wash),
+            url("/second_section_background.png") center / cover no-repeat,
+            #2563eb;
+    }
+
+    .problem-head {
+        max-width: 38rem;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .problem-title {
+        margin: 0;
+        font-size: clamp(1.45rem, 2.8vw, 2rem);
+        line-height: 1.18;
+        letter-spacing: -0.03em;
+        font-weight: 700;
+        text-wrap: balance;
+    }
+
+    .problem-sub {
+        margin: 0.75rem 0 0;
+        font-size: 0.9rem;
+        line-height: 1.55;
+        color: var(--muted);
+        text-wrap: pretty;
+    }
+
+    /* ---------- Numbered cards ---------- */
+
+    .problem-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin: 2.25rem 0 0;
+        padding: 0;
+        list-style: none;
+        border-radius: var(--radius);
+        background: rgb(255 255 255 / 0.55);
+        box-shadow: 0 1px 2px rgb(20 17 15 / 0.04);
+    }
+
+    .problem-card {
+        padding: 1.35rem 1.4rem 1.5rem;
+    }
+
+    /* Hairline rules between columns, as in the reference. */
+    .problem-card + .problem-card {
+        border-left: 1px solid rgb(20 17 15 / 0.09);
+    }
+
+    .problem-num {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: var(--accent);
+    }
+
+    .problem-card-title {
+        margin: 0.85rem 0 0.4rem;
+        font-size: 0.95rem;
+        font-weight: 650;
+        letter-spacing: -0.015em;
+    }
+
+    .problem-card-body {
+        margin: 0;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        color: var(--muted);
+        text-wrap: pretty;
+    }
+
+    /* ---------- Founder note ---------- */
+
+    .note {
+        margin: 1.25rem 0 0;
+        padding: 1.6rem 1.85rem 1.75rem;
+        border-radius: var(--radius);
+        background: rgb(255 255 255 / 0.72);
+        box-shadow: 0 1px 2px rgb(20 17 15 / 0.04);
+    }
+
+    .note-quote {
+        margin: 0;
+        max-width: 48rem;
+    }
+
+    .note-lead {
+        margin: 0;
+        font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+        line-height: 1.45;
+        letter-spacing: -0.015em;
+        font-weight: 600;
+        text-wrap: pretty;
+    }
+
+    .note-body {
+        margin: 0.85rem 0 0;
+        font-size: 0.875rem;
+        line-height: 1.55;
+        color: var(--muted);
+        max-width: 42rem;
+        text-wrap: pretty;
+    }
+
+    .note-by {
+        margin: 1.1rem 0 0;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--accent);
+    }
+
+    @media (max-width: 860px) {
+        .problem {
+            padding-bottom: 3rem;
+        }
+
+        .problem-panel {
+            padding: 2.75rem 1.15rem 3rem;
+            --wash: radial-gradient(
+                ellipse 92% 62% at 50% 50%,
+                rgb(255 255 255 / 0.97) 0%,
+                rgb(255 255 255 / 0.94) 55%,
+                rgb(255 255 255 / 0.75) 74%,
+                rgb(255 255 255 / 0) 92%
+            );
+        }
+
+        .problem-grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .problem-card + .problem-card {
+            border-left: 0;
+            border-top: 1px solid rgb(20 17 15 / 0.09);
+        }
+
+        .note {
+            padding: 1.35rem 1.25rem 1.5rem;
+        }
+    }
+</style>

@@ -1,0 +1,312 @@
+---
+const buyItems = [
+    {
+        title: "You've got a day job and an hour, not a weekend",
+        body: "Learnist fits between the commute and dinner, every day.",
+    },
+    {
+        title: "You ship with AI but want to own it",
+        body: "Fast code is easy. Understanding it when it breaks is the gap this closes.",
+    },
+    {
+        title: "You're allergic to passive video courses",
+        body: "You'd rather read, build, and be challenged than watch someone else type.",
+    },
+    {
+        title: "You're disciplined",
+        body: "The system adapts to you and keeps you hooked, but it can't want it for you.",
+    },
+];
+
+const skipItems = [
+    {
+        title: "You're looking for a job-cram shortcut",
+        body: "This makes you good, not interview-ready overnight.",
+    },
+    {
+        title: "You already study 2–3 focused hours a day",
+        body: "You may not need the structure.",
+    },
+    {
+        title: "You won't show up",
+        body: "There's no cure for discipline. If you won't open it daily, don't buy it.",
+    },
+    {
+        title: "You want to watch, not write",
+        body: "No code gets written for you here.",
+    },
+];
+---
+
+<section class="fit">
+    <header class="fit-head">
+        <p class="fit-tag">Honest check</p>
+        <h2 class="fit-title">Is this for you?</h2>
+        <p class="fit-sub">
+            A lifetime seat only helps if the system matches how you actually
+            learn.
+        </p>
+    </header>
+
+    <div class="fit-panel">
+        <div class="fit-col fit-col--buy">
+            <h3 class="fit-label">
+                <span class="fit-label-mark" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                        <path
+                            d="M3.5 8.5 6.5 11.5 12.5 4.5"
+                            stroke="currentColor"
+                            stroke-width="1.9"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+                Buy this if
+            </h3>
+
+            <ul class="fit-list">
+                {
+                    buyItems.map((item) => (
+                        <li class="fit-item">
+                            <strong class="fit-item-title">{item.title}</strong>
+                            <p class="fit-item-body">{item.body}</p>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+
+        <div class="fit-col fit-col--skip">
+            <h3 class="fit-label">
+                <span class="fit-label-mark" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                        <path
+                            d="M4.5 4.5 11.5 11.5M11.5 4.5 4.5 11.5"
+                            stroke="currentColor"
+                            stroke-width="1.9"
+                            stroke-linecap="round"></path>
+                    </svg>
+                </span>
+                Skip this if
+            </h3>
+
+            <ul class="fit-list">
+                {
+                    skipItems.map((item) => (
+                        <li class="fit-item">
+                            <strong class="fit-item-title">{item.title}</strong>
+                            <p class="fit-item-body">{item.body}</p>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </div>
+</section>
+
+<style>
+    .fit {
+        position: relative;
+        z-index: 2;
+        padding: 1.5rem 0 4.5rem;
+        color: var(--ink);
+    }
+
+    .fit-head {
+        max-width: 34rem;
+        margin: 0 0 2.25rem;
+    }
+
+    .fit-tag {
+        margin: 0;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+    }
+
+    .fit-title {
+        margin: 0.6rem 0 0;
+        font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        font-weight: 700;
+    }
+
+    .fit-sub {
+        margin: 0.65rem 0 0;
+        font-size: 0.95rem;
+        line-height: 1.55;
+        color: var(--muted);
+        text-wrap: pretty;
+    }
+
+    /* ---------- Panel ----------
+       One bordered surface split by a hairline, matching the bento and the
+       numbered cards above it. The two sides are separated by weight, not hue:
+       the "buy" column carries the accent, the "skip" column stays neutral. */
+
+    .fit-panel {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background: #fff;
+        border: 1px solid var(--rule);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgb(20 17 15 / 0.04);
+    }
+
+    .fit-col {
+        padding: 1.85rem 1.7rem 2rem;
+    }
+
+    .fit-col + .fit-col {
+        border-left: 1px solid var(--rule);
+    }
+
+    .fit-col--skip {
+        background: linear-gradient(
+            180deg,
+            rgb(20 17 15 / 0.02) 0%,
+            transparent 40%
+        );
+    }
+
+    /* ---------- Labels ---------- */
+
+    .fit-label {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin: 0 0 1.35rem;
+        font-size: 1.05rem;
+        font-weight: 650;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+    }
+
+    .fit-label-mark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 1.6rem;
+        height: 1.6rem;
+        border-radius: 50%;
+    }
+
+    /* Sized by attribute on the element too — an SVG with only a viewBox and
+       no intrinsic size expands to fill its container if this rule is missed. */
+    .fit-label-mark svg {
+        display: block;
+        flex-shrink: 0;
+        width: 14px;
+        height: 14px;
+    }
+
+    .fit-col--buy .fit-label-mark {
+        background: rgb(0 0 255 / 0.1);
+        color: var(--accent);
+    }
+
+    .fit-col--skip .fit-label-mark {
+        background: rgb(20 17 15 / 0.06);
+        color: var(--muted);
+    }
+
+    .fit-col--skip .fit-label {
+        color: var(--muted);
+    }
+
+    /* ---------- List ---------- */
+
+    .fit-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .fit-item {
+        position: relative;
+        padding: 1.05rem 0 1.05rem 1rem;
+        border-top: 1px solid var(--rule);
+    }
+
+    .fit-item:last-child {
+        padding-bottom: 0;
+    }
+
+    /* Accent ticks on the left edge stand in for the old icon column and keep
+       the text block flush. */
+    .fit-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 1.15rem;
+        width: 2px;
+        height: 0.85rem;
+        border-radius: 999px;
+        background: var(--rule);
+        transition:
+            background-color 0.18s ease,
+            height 0.18s ease;
+    }
+
+    .fit-col--buy .fit-item:hover::before {
+        background: var(--accent);
+        height: 1.35rem;
+    }
+
+    .fit-col--skip .fit-item:hover::before {
+        background: #b3aca4;
+        height: 1.35rem;
+    }
+
+    .fit-item-title {
+        display: block;
+        font-size: 0.95rem;
+        font-weight: 650;
+        letter-spacing: -0.015em;
+        line-height: 1.3;
+    }
+
+    .fit-col--skip .fit-item-title {
+        color: #3c3833;
+    }
+
+    .fit-item-body {
+        margin: 0.35rem 0 0;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: var(--muted);
+        text-wrap: pretty;
+    }
+
+    /* ---------- Responsive ---------- */
+
+    @media (max-width: 860px) {
+        .fit {
+            padding-bottom: 3.25rem;
+        }
+
+        .fit-panel {
+            grid-template-columns: 1fr;
+        }
+
+        .fit-col {
+            padding: 1.55rem 1.3rem 1.75rem;
+        }
+
+        .fit-col + .fit-col {
+            border-left: 0;
+            border-top: 1px solid var(--rule);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .fit-item::before {
+            transition: none;
+        }
+    }
+</style>
