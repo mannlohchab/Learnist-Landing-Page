@@ -1,19 +1,18 @@
 ---
-// Learnist vs. the two things people already spend on. Cell values are either a
-// verdict token (rendered as a mark) or literal text for the cost row.
-const columns = ["Learnist", "Courses", "AI"];
+// kmos against the two ways this work usually gets bought.
+const columns = ["kmos", "Agency", "Freelancer"];
 
 const rows = [
-    { feature: "Adapts as you grow", cells: ["yes", "no", "no"] },
-    { feature: "Byte-sized lessons + labs", cells: ["yes", "partial", "no"] },
-    { feature: "Coaches without copy-paste", cells: ["yes", "no", "no"] },
-    { feature: "Validates your lab code", cells: ["yes", "no", "partial"] },
-    { feature: "Private workspace", cells: ["yes", "no", "partial"] },
-    { feature: "Any AI IDE or CLI", cells: ["yes", "no", "partial"] },
-    { feature: "One-time lifetime price", cells: ["yes", "no", "no"] },
+    { feature: "Same people after launch", cells: ["yes", "no", "partial"] },
+    { feature: "Websites and apps", cells: ["yes", "yes", "partial"] },
+    { feature: "Tech support included", cells: ["yes", "partial", "no"] },
+    { feature: "Automation, not just delivery", cells: ["yes", "partial", "no"] },
+    { feature: "You talk to who builds it", cells: ["yes", "no", "yes"] },
+    { feature: "Written scope up front", cells: ["yes", "partial", "partial"] },
+    { feature: "No account-team handoff", cells: ["yes", "no", "yes"] },
     {
-        feature: "Cost after year one",
-        cells: ["$0", "Varies", "$240–1,200/yr"],
+        feature: "How it's priced",
+        cells: ["Scoped", "Retainer", "Hourly"],
         text: true,
     },
 ];
@@ -23,19 +22,19 @@ const rows = [
     <header class="cmp-head">
         <p class="cmp-tag">The comparison</p>
         <h2 id="cmp-heading" class="cmp-title">
-            Courses entertain. Chat ships for you.<br />
-            Learnist makes you the one who <em>understands</em>.
+            Agencies hand it off. Freelancers leave.<br />
+            kmos stays for what <em>keeps running</em>.
         </h2>
         <p class="cmp-sub">
-            A decent AI coding setup runs $20–$100 a month, forever. Learnist is
-            $60 once, and works on top of the tool you already pay for.
+            A collective is small on purpose. The people who design the site
+            write the automation and answer when it breaks.
         </p>
     </header>
 
     <div class="cmp-scroll">
         <table class="cmp-table">
             <caption class="sr-only">
-                Learnist compared with video courses and general AI chat tools
+                kmos compared with a typical agency and a freelancer
             </caption>
             <thead>
                 <tr>

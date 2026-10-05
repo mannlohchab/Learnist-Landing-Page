@@ -5,17 +5,7 @@ import IsThisForYou from "./IsThisForYou.astro";
 import Navbar from "./Navbar.astro";
 import SecondSection from "./SecondSection.astro";
 
-// Tools Learnist plugs into. `icon` maps to a file in public/icons.
-const worksWith = [
-    { name: "Claude", icon: "claude" },
-    { name: "Claude Code", icon: "claudecode" },
-    { name: "OpenAI", icon: "openai" },
-    { name: "GitHub Copilot", icon: "copilot" },
-    { name: "Cursor", icon: "cursor" },
-    { name: "VS Code", icon: "vscode" },
-    { name: "JetBrains", icon: "jetbrains" },
-    { name: "Zed", icon: "zed" },
-];
+const practices = ["Websites", "Apps", "Support", "Automation"];
 ---
 
 <div class="page">
@@ -28,24 +18,16 @@ const worksWith = [
         <div class="hero-body">
             <div class="hero-lead">
                 <h1 class="headline">
-                    Become the engineer <br />
-                    AI can't <em>replace</em>
+                    Websites, apps, and<br />
+                    the systems that <em>run them</em>
                 </h1>
 
                 <div class="trust">
-                    <p class="trust-label">Learnist works with all of it.</p>
+                    <p class="trust-label">Four things, from the same people.</p>
                     <ul class="trust-logos">
                         {
-                            worksWith.map((tool) => (
-                                <li>
-                                    <img
-                                        class="trust-icon"
-                                        src={`/icons/${tool.icon}.svg`}
-                                        alt={tool.name}
-                                        width="24"
-                                        height="24"
-                                    />
-                                </li>
+                            practices.map((name) => (
+                                <li class="trust-name">{name}</li>
                             ))
                         }
                     </ul>
@@ -54,16 +36,17 @@ const worksWith = [
 
             <div class="hero-aside">
                 <p class="subhead">
-                    Byte-sized lessons and labs that coach without handing you
-                    the answer. Runs inside the AI editor you already use.
+                    kmos is a software collective. We design and build sites
+                    and products, then stay for support and the automation
+                    that keeps them moving.
                 </p>
 
                 <div class="cta">
-                    <a class="cta-btn cta-primary" href="#signup"
-                        >Get for Lifetime</a
+                    <a class="cta-btn cta-primary" href="/start"
+                        >Start a project</a
                     >
-                    <a class="cta-btn cta-secondary" href="#demo"
-                        >See Learnist in action</a
+                    <a class="cta-btn cta-secondary" href="/product"
+                        >See the work</a
                     >
                 </div>
             </div>
@@ -182,11 +165,12 @@ const worksWith = [
         display: flex;
     }
 
-    .trust-icon {
-        display: block;
-        width: 1.6rem;
-        height: 1.6rem;
-        object-fit: contain;
+    .trust-name {
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink);
     }
 
     .hero-aside {

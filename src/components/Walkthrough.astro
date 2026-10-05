@@ -1,57 +1,52 @@
 ---
-// Four screens of a single Learnist session, in the order you meet them.
-// `shot` maps to a file in public/product.
+// Four moves of an engagement, in the order a project meets them.
 const steps = [
     {
         num: "01",
-        tab: "Path",
-        title: "Sequenced, not searched",
-        body: "Pick a topic and get an ordered set of lessons. No tab graveyard, no deciding what comes next.",
-        shot: "step-path",
-        alt: "A tRPC on Express topic in Learnist, showing five numbered lessons in order.",
+        tab: "Scope",
+        title: "The work, named",
+        body: "A written scope before anyone starts. Sites, apps, support, and automation called out separately.",
+        kind: "scope",
     },
     {
         num: "02",
-        tab: "See it",
-        title: "The shape before the syntax",
-        body: "Tables and diagrams that show how the pieces talk. You understand the system before you touch a file.",
-        shot: "step-see",
-        alt: "A layer responsibility table above a sequence diagram tracing a request through context, middleware, and handler.",
+        tab: "Shape",
+        title: "The shape before the build",
+        body: "Structure, flows, and the edges. You see how it fits together before a line is committed.",
+        kind: "shape",
     },
     {
         num: "03",
         tab: "Build",
-        title: "You write it, not the model",
-        body: "A spec with real parts to implement. It tells you what to build and stays quiet about how.",
-        shot: "step-build",
-        alt: "A challenge brief in Learnist listing implementation steps across three parts.",
+        title: "You get the thing, not a deck",
+        body: "Websites and apps, implemented. The repetitive parts get automated while the build is still open.",
+        kind: "build",
     },
     {
         num: "04",
-        tab: "Prove",
-        title: "Wrong answers get explained",
-        body: "Retrieval questions the moment you finish. Miss one and it tells you why, then makes you go again.",
-        shot: "step-prove",
-        alt: "A retrieval practice quiz with a wrong answer marked in red and an explanation below it.",
+        tab: "Care",
+        title: "After launch, someone answers",
+        body: "Support with a person on it, and automations that keep running on a schedule.",
+        kind: "care",
     },
 ];
 ---
 
 <section class="walk" id="walkthrough">
     <header class="walk-head">
-        <p class="eyebrow">The product</p>
+        <p class="eyebrow">The work</p>
         <h1 class="walk-title">
-            One hour. Four moves.<br />
-            Nothing you can't <em>explain</em>
+            One engagement. Four moves.<br />
+            Nothing that gets <em>handed off</em>
         </h1>
         <p class="walk-sub">
-            These are real screens, not mockups. Walk a path, read the diagram,
-            write the code, then defend it out loud.
+            Name the work, agree the shape, build it, then stay for support
+            and automation.
         </p>
     </header>
 
     <div class="walk-stage">
-        <div class="tabs" role="tablist" aria-label="Steps in a Learnist session">
+        <div class="tabs" role="tablist" aria-label="Steps in a kmos engagement">
             {
                 steps.map((step, i) => (
                     <button
@@ -91,17 +86,53 @@ const steps = [
                                 <i />
                                 <i />
                             </span>
-                            <span class="frame-url">learnist.app</span>
+                            <span class="frame-url">kmos.dev</span>
                         </div>
                         <div class="frame-shot">
-                            <img
-                                src={`/product/${step.shot}.png`}
-                                alt={step.alt}
-                                width="1200"
-                                height="699"
-                                loading={i === 0 ? "eager" : "lazy"}
-                                decoding="async"
-                            />
+                            {step.kind === "scope" && (
+                                <div class="mock">
+                                    <p class="mock-kicker">Engagement</p>
+                                    <ul class="mock-rows">
+                                        <li><span>01</span><div><strong>Website</strong><p>Marketing site, five pages, ready to edit.</p></div></li>
+                                        <li><span>02</span><div><strong>App</strong><p>Internal tool for the job the site can't hold.</p></div></li>
+                                        <li><span>03</span><div><strong>Support</strong><p>A person on the system after it is live.</p></div></li>
+                                        <li><span>04</span><div><strong>Automation</strong><p>The Monday export, running at 06:00.</p></div></li>
+                                    </ul>
+                                </div>
+                            )}
+                            {step.kind === "shape" && (
+                                <div class="mock">
+                                    <p class="mock-kicker">Shape</p>
+                                    <div class="mock-table">
+                                        <div><em>Page</em><em>Job</em></div>
+                                        <div><span>Home</span><span>Say what kmos does</span></div>
+                                        <div><span>Work</span><span>Show the four moves</span></div>
+                                        <div><span>Pricing</span><span>Scope before a start</span></div>
+                                        <div><span>Inbox</span><span>Where support lands</span></div>
+                                    </div>
+                                </div>
+                            )}
+                            {step.kind === "build" && (
+                                <div class="mock">
+                                    <p class="mock-kicker">Build</p>
+                                    <ul class="mock-checks">
+                                        <li><i class="ok">✓</i> Site live on the domain</li>
+                                        <li><i class="ok">✓</i> App behind the same login</li>
+                                        <li><i class="ok">✓</i> Invoice sync scheduled</li>
+                                        <li><i class="wait">–</i> Support handoff, this Friday</li>
+                                    </ul>
+                                </div>
+                            )}
+                            {step.kind === "care" && (
+                                <div class="mock">
+                                    <p class="mock-kicker">Care</p>
+                                    <ul class="mock-rows">
+                                        <li><span class="ok">open</span><div><strong>Checkout timeout</strong><p>Looking now. Rollback is staged.</p></div></li>
+                                        <li><span>06:00</span><div><strong>invoice-sync</strong><p>Last run wrote 128 records.</p></div></li>
+                                        <li><span class="ok">quiet</span><div><strong>Site</strong><p>No incidents this week.</p></div></li>
+                                    </ul>
+                                </div>
+                            )}
                         </div>
                     </figure>
                 </div>
@@ -110,8 +141,8 @@ const steps = [
     </div>
 
     <div class="walk-cta">
-        <a class="btn btn-solid" href="#signup">Get for lifetime</a>
-        <a class="btn btn-ghost" href="/pricing">See what's included</a>
+        <a class="btn btn-solid" href="/start">Start a project</a>
+        <a class="btn btn-ghost" href="/pricing">See how it's priced</a>
     </div>
 </section>
 
@@ -366,12 +397,156 @@ const steps = [
         background: var(--surface);
     }
 
-    .frame-shot img {
-        display: block;
-        width: 100%;
+    .mock {
+        box-sizing: border-box;
         height: 100%;
-        object-fit: cover;
-        object-position: top center;
+        padding: 1.15rem 1.2rem 1.25rem;
+        background: #f6f5f3;
+        color: var(--ink);
+    }
+
+    .mock-kicker {
+        margin: 0 0 0.85rem;
+        font-size: 0.68rem;
+        font-weight: 650;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+    }
+
+    .mock-rows,
+    .mock-checks,
+    .mock-plain {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .mock-rows {
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+    }
+
+    .mock-rows li {
+        display: grid;
+        grid-template-columns: 2.6rem minmax(0, 1fr);
+        gap: 0.75rem;
+        align-items: start;
+        padding: 0.7rem 0.8rem;
+        border: 1px solid var(--rule);
+        border-radius: 12px;
+        background: #fff;
+    }
+
+    .mock-rows span {
+        font-size: 0.68rem;
+        font-weight: 650;
+        letter-spacing: 0.04em;
+        color: var(--accent);
+    }
+
+    .mock-rows strong,
+    .mock-checks li {
+        font-size: 0.84rem;
+        font-weight: 650;
+        letter-spacing: -0.015em;
+    }
+
+    .mock-rows p {
+        margin: 0.15rem 0 0;
+        font-size: 0.75rem;
+        line-height: 1.4;
+        color: var(--muted);
+    }
+
+    .mock-split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.7rem;
+        height: calc(100% - 1.6rem);
+    }
+
+    .mock-split > div {
+        padding: 0.85rem 0.9rem;
+        border: 1px solid var(--rule);
+        border-radius: 12px;
+        background: #fff;
+    }
+
+    .mock-label {
+        margin: 0 0 0.65rem;
+        font-size: 0.72rem;
+        font-weight: 650;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    .mock-plain li {
+        padding: 0.45rem 0;
+        border-top: 1px solid var(--rule);
+        font-size: 0.86rem;
+        font-weight: 550;
+    }
+
+    .mock-checks {
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+    }
+
+    .mock-checks li {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.75rem 0.85rem;
+        border: 1px solid var(--rule);
+        border-radius: 12px;
+        background: #fff;
+        font-weight: 550;
+    }
+
+    .mock-checks i,
+    .mock-rows .ok {
+        font-style: normal;
+        color: #1b7a2e;
+    }
+
+    .mock-checks .wait {
+        color: #a19b94;
+    }
+
+    .mock-table {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        border: 1px solid var(--rule);
+        border-radius: 12px;
+        background: #fff;
+    }
+
+    .mock-table > div {
+        display: grid;
+        grid-template-columns: 0.7fr 1.3fr;
+        gap: 0.75rem;
+        padding: 0.7rem 0.85rem;
+        border-top: 1px solid var(--rule);
+        font-size: 0.82rem;
+    }
+
+    .mock-table > div:first-child {
+        border-top: 0;
+        background: var(--surface);
+    }
+
+    .mock-table em {
+        font-style: normal;
+        font-size: 0.68rem;
+        font-weight: 650;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
     }
 
     /* ---------- CTA ---------- */

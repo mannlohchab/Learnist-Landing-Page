@@ -1,6 +1,5 @@
 ---
-// Tool icons reused from the hero's "works with" row.
-const editors = ["claudecode", "cursor", "vscode", "zed", "copilot", "jetbrains"];
+const surfaces = ["Web", "iOS", "Internal", "API"];
 
 // Streak grid: 1 = completed day, 0 = missed, 2 = today.
 const streak = [
@@ -11,19 +10,19 @@ const streak = [
 ];
 
 const skills = [
-    { name: "Systems", pct: 82 },
-    { name: "Debugging", pct: 64 },
-    { name: "Data structures", pct: 47 },
-    { name: "Concurrency", pct: 28 },
+    { name: "Websites", pct: 92 },
+    { name: "Apps", pct: 78 },
+    { name: "Support", pct: 70 },
+    { name: "Automation", pct: 64 },
 ];
 ---
 
-<section class="bento">
+<section class="bento" id="services">
     <header class="bento-head">
         <h2 class="bento-title">What you actually get</h2>
         <p class="bento-sub">
-            One system, six moving parts. All of it built to make the
-            understanding stick.
+            Four kinds of work, one collective. Built to keep running after
+            the launch.
         </p>
     </header>
 
@@ -46,8 +45,8 @@ const skills = [
                 </div>
             </div>
             <div class="cell-text">
-                <h3>Daily rhythm</h3>
-                <p>One hour a day, sequenced so nothing is wasted.</p>
+                <h3>Websites</h3>
+                <p>Sites with a point of view, built so you can change them later.</p>
             </div>
         </article>
 
@@ -56,22 +55,17 @@ const skills = [
             <div class="visual visual--editors">
                 <ul class="editor-grid">
                     {
-                        editors.map((icon) => (
+                        surfaces.map((name) => (
                             <li class="editor-chip">
-                                <img
-                                    src={`/icons/${icon}.svg`}
-                                    alt=""
-                                    width="22"
-                                    height="22"
-                                />
+                                <span>{name}</span>
                             </li>
                         ))
                     }
                 </ul>
             </div>
             <div class="cell-text">
-                <h3>Editor-native</h3>
-                <p>Runs inside the AI tools you already have open.</p>
+                <h3>Apps</h3>
+                <p>Product software for the job a website cannot do.</p>
             </div>
         </article>
 
@@ -82,19 +76,17 @@ const skills = [
                     <div class="term-bar">
                         <span></span><span></span><span></span>
                     </div>
-                    <pre class="term-body"><code><span class="c-dim"
-                            >$</span
-                        > learnist lab start rate-limiter
+                    <pre class="term-body"><code><span class="c-dim">$</span> kmos run invoice-sync
 
-<span class="c-ok">✓</span> 3 tests passing
-<span class="c-bad">✗</span> burst_refill — expected 5, got 8
+<span class="c-ok">✓</span> 128 records written
+<span class="c-ok">✓</span> slack notified
 
-<span class="c-dim">hint</span> your window never resets</code></pre>
+<span class="c-dim">next</span>  06:00 daily</code></pre>
                 </div>
             </div>
             <div class="cell-text">
-                <h3>Labs</h3>
-                <p>Broken code, real tests. You fix it, not the model.</p>
+                <h3>Automation</h3>
+                <p>The repetitive work, running without someone babysitting it.</p>
             </div>
         </article>
 
@@ -102,18 +94,16 @@ const skills = [
         <article class="cell">
             <div class="visual">
                 <div class="chat" aria-hidden="true">
-                    <div class="bubble bubble--you">
-                        Just give me the answer.
-                    </div>
+                    <div class="bubble bubble--you">The checkout is down.</div>
                     <div class="bubble bubble--coach">
-                        Not yet. What happens to your counter at second 61?
+                        On it. Rollback is staged if the patch doesn't hold.
                     </div>
-                    <div class="bubble bubble--you">…oh.</div>
+                    <div class="bubble bubble--you">It's back.</div>
                 </div>
             </div>
             <div class="cell-text">
-                <h3>Coaching, not answers</h3>
-                <p>It pushes back until the idea is yours.</p>
+                <h3>Tech support</h3>
+                <p>A person after launch, not a ticket that closes itself.</p>
             </div>
         </article>
 
@@ -137,8 +127,8 @@ const skills = [
                 </ul>
             </div>
             <div class="cell-text">
-                <h3>Adaptive map</h3>
-                <p>Weak spots get more reps. Strong ones get out of the way.</p>
+                <h3>One collective</h3>
+                <p>Sites, apps, support, and automation from the same people.</p>
             </div>
         </article>
 
@@ -146,12 +136,12 @@ const skills = [
         <article class="cell">
             <div class="visual visual--price">
                 <p class="price-mark" aria-hidden="true">
-                    Lifetime<span>∞</span>
+                    On call<span>.</span>
                 </p>
             </div>
             <div class="cell-text">
-                <h3>One seat, forever</h3>
-                <p>Pay once. Every future track is already included.</p>
+                <h3>After it ships</h3>
+                <p>Support and automation stay. Shipping is not the end.</p>
             </div>
         </article>
     </div>
@@ -280,7 +270,7 @@ const skills = [
 
     .editor-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.7rem;
         margin: 0;
         padding: 0;
@@ -291,18 +281,15 @@ const skills = [
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 3.25rem;
+        min-width: 4.6rem;
         height: 3.25rem;
+        padding: 0 0.75rem;
         border: 1px solid var(--rule);
         border-radius: 10px;
         background: var(--surface);
-    }
-
-    .editor-chip img {
-        display: block;
-        width: 1.4rem;
-        height: 1.4rem;
-        object-fit: contain;
+        font-size: 0.78rem;
+        font-weight: 650;
+        letter-spacing: -0.02em;
     }
 
     /* ---------- Terminal ---------- */
@@ -395,7 +382,7 @@ const skills = [
 
     .bar-row {
         display: grid;
-        grid-template-columns: 7.5rem 1fr;
+        grid-template-columns: 6.25rem 1fr;
         align-items: center;
         gap: 0.75rem;
     }

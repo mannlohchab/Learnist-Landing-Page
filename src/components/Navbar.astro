@@ -17,15 +17,14 @@ const navLinks: NavLink[] = [
         <a class="brand" href="/">
             <img
                 class="brand-mark"
-                src="/learnist.webp"
-                alt=""
-                width="48"
-                height="48"
+                src="/kmos.png"
+                alt="kmos"
+                width="280"
+                height="100"
             />
-            <span class="brand-name">Learnist</span>
         </a>
 
-        <div class="nav-links">
+        <div class="nav-links" id="nav-panel">
             {
                 navLinks.map((link, i) =>
                     link.menu ? (
@@ -71,7 +70,16 @@ const navLinks: NavLink[] = [
         </div>
 
         <div class="nav-actions">
-            <a class="btn btn-solid" href="#signup">Get for lifetime</a>
+            <button
+                class="nav-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="nav-panel"
+                aria-label="Open menu"
+            >
+                <span class="nav-toggle-bars" aria-hidden="true"></span>
+            </button>
+            <a class="btn btn-solid" href="/start">Start a project</a>
         </div>
     </nav>
 </header>
@@ -115,8 +123,8 @@ const navLinks: NavLink[] = [
 
     .brand-mark {
         display: block;
-        width: 2.7rem;
-        height: 2.7rem;
+        height: 1.7rem;
+        width: auto;
         object-fit: contain;
     }
 
@@ -236,6 +244,69 @@ const navLinks: NavLink[] = [
         gap: 0.4rem;
     }
 
+    .nav-toggle {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        padding: 0;
+        border: 0;
+        border-radius: 999px;
+        background: #f7f6f4;
+        color: #14110f;
+        cursor: pointer;
+    }
+    .nav-toggle:hover {
+        background: #e6e3df;
+    }
+
+    .nav-toggle-bars,
+    .nav-toggle-bars::before,
+    .nav-toggle-bars::after {
+        display: block;
+        width: 0.85rem;
+        height: 1.5px;
+        border-radius: 1px;
+        background: currentColor;
+    }
+
+    .nav-toggle-bars {
+        position: relative;
+    }
+
+    .nav-toggle-bars::before,
+    .nav-toggle-bars::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        transition:
+            transform 0.18s ease,
+            top 0.18s ease;
+    }
+
+    .nav-toggle-bars::before {
+        top: -5px;
+    }
+
+    .nav-toggle-bars::after {
+        top: 5px;
+    }
+
+    .nav.is-open .nav-toggle-bars {
+        background: transparent;
+    }
+
+    .nav.is-open .nav-toggle-bars::before {
+        top: 0;
+        transform: rotate(45deg);
+    }
+
+    .nav.is-open .nav-toggle-bars::after {
+        top: 0;
+        transform: rotate(-45deg);
+    }
+
     .btn {
         display: inline-flex;
         align-items: center;
@@ -267,14 +338,80 @@ const navLinks: NavLink[] = [
     }
 
     @media (max-width: 720px) {
+        .nav-wrap {
+            padding-top: 0.85rem;
+        }
+
+        .nav {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            gap: 0.65rem;
+            width: 100%;
+            padding: 0.4rem 0.4rem 0.4rem 0.95rem;
+        }
+
+        .nav-toggle {
+            display: inline-flex;
+        }
+
         .nav-links {
             display: none;
+            position: absolute;
+            top: calc(100% + 0.45rem);
+            left: 0;
+            right: auto;
+            justify-self: stretch;
+            box-sizing: border-box;
+            width: 100%;
+            z-index: 5;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.15rem;
+            padding: 0.4rem;
+            border-radius: 18px;
+            background: #fff;
+            border: 1px solid #e6e3df;
+            box-shadow:
+                0 1px 2px rgb(20 17 15 / 0.05),
+                0 12px 28px -12px rgb(20 17 15 / 0.12);
+        }
+
+        .nav.is-open .nav-links {
+            display: flex;
+        }
+
+        .nav-link {
+            padding: 0.7rem 0.85rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover {
+            background: #f7f6f4;
+        }
+
+        .nav-menu {
+            position: static;
+            width: auto;
+            padding: 0 0.35rem 0.25rem;
+            border: 0;
+            box-shadow: none;
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+        }
+
+        .nav-item.open .nav-menu {
+            transform: none;
         }
     }
 
     @media (prefers-reduced-motion: reduce) {
         .nav-menu,
-        .chev {
+        .chev,
+        .nav-toggle-bars::before,
+        .nav-toggle-bars::after {
             transition: none;
         }
     }
@@ -317,13 +454,40 @@ const navLinks: NavLink[] = [
         });
     });
 
-    document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") items.forEach(close);
-    });
+    const nav = document.querySelector<HTMLElement>(".nav");
+    const toggle = nav?.querySelector<HTMLButtonElement>(".nav-toggle");
 
-    document.addEventListener("click", (event) => {
-        items.forEach((item) => {
-            if (!item.contains(event.target as Node)) close(item);
+    function setMenu(open: boolean) {
+        if (!nav || !toggle) return;
+        nav.classList.toggle("is-open", open);
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    }
+
+    if (nav && toggle && nav.dataset.navBound !== "1") {
+        nav.dataset.navBound = "1";
+        toggle.addEventListener("click", (event) => {
+            event.stopPropagation();
+            setMenu(!nav.classList.contains("is-open"));
         });
-    });
+
+        nav.querySelectorAll(".nav-links a").forEach((link) => {
+            link.addEventListener("click", () => setMenu(false));
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                items.forEach(close);
+                setMenu(false);
+            }
+        });
+
+        document.addEventListener("click", (event) => {
+            const target = event.target as Node;
+            items.forEach((item) => {
+                if (!item.contains(target)) close(item);
+            });
+            if (!nav.contains(target)) setMenu(false);
+        });
+    }
 </script>

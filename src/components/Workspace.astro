@@ -3,35 +3,25 @@
 // heading on the left, two capability rows on the right, artwork underneath.
 const capabilities = [
     {
-        title: "Search the content, not the titles",
-        body: "⌘K reaches into lesson bodies — .query() calls, middleware notes, the line you half-remember — across every topic you've touched.",
+        title: "Support that names the problem",
+        body: "When something breaks, the note says what failed, what we did, and whether a rollback was waiting. Not a ticket number.",
         icon: "search",
     },
     {
-        title: "Progress that looks like work",
-        body: "Active days, revises, outcomes met, and a heatmap of when you actually showed up. Not a percentage bar that only goes up.",
+        title: "Automation you can see running",
+        body: "Last run, next run, and what it wrote. The Monday job does not depend on someone remembering it.",
         icon: "activity",
     },
 ];
 
 const shots = [
-    // Both sources are full-page 1200x700 captures. Side by side they need
-    // help to stay readable: `zoom` pushes past the dead margins each carries
-    // (page chrome around the palette, none around the profile stats, which
-    // already run edge to edge), and `focus` is the origin it grows from.
     {
-        src: "/product/search.webp",
-        alt: "Learnist command palette open on a query search, showing matching lines from two tRPC lessons.",
-        caption: "Full-text search",
-        zoom: 1.5,
-        focus: "50% 50%",
+        caption: "Support",
+        kind: "support" as const,
     },
     {
-        src: "/product/profile.webp",
-        alt: "A Learnist profile page showing weekly event counts, a contribution heatmap, and all-time totals.",
-        caption: "Your profile",
-        zoom: 1,
-        focus: "50% 30%",
+        caption: "Automation",
+        kind: "automation" as const,
     },
 ];
 ---
@@ -53,16 +43,15 @@ const shots = [
                     <rect x="2" y="2.75" width="12" height="10.5" rx="2"></rect>
                     <path d="M2 6.25h12M5.75 6.25v7"></path>
                 </svg>
-                The workspace
+                After launch
             </p>
             <h2 class="ws-title">
-                Everything you learned,<br />
-                still <em>findable</em>
+                Everything we shipped,<br />
+                still <em>looked after</em>
             </h2>
             <p class="ws-sub">
-                Lessons don't disappear once you close them. The workspace keeps
-                the whole trail — searchable, and honest about the days you
-                skipped.
+                The site and the app are not the end of the work. Support and
+                automation stay attached to what we built.
             </p>
         </div>
 
@@ -118,18 +107,46 @@ const shots = [
                             </span>
                             <span class="shot-caption">{shot.caption}</span>
                         </div>
-                        <div
-                            class="shot-crop"
-                            style={`--zoom:${shot.zoom};--focus:${shot.focus}`}
-                        >
-                            <img
-                                src={shot.src}
-                                alt={shot.alt}
-                                width="1200"
-                                height="700"
-                                loading="lazy"
-                                decoding="async"
-                            />
+                        <div class="shot-crop">
+                            {
+                                shot.kind === "support" ? (
+                                    <div class="board">
+                                        <p class="board-kicker">Open</p>
+                                        <ul>
+                                            <li>
+                                                <strong>Checkout patch</strong>
+                                                <span>Answered · 14 min</span>
+                                            </li>
+                                            <li>
+                                                <strong>Form not sending</strong>
+                                                <span>Looking now</span>
+                                            </li>
+                                            <li>
+                                                <strong>DNS for the new domain</strong>
+                                                <span>Waiting on you</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                ) : (
+                                    <div class="board">
+                                        <p class="board-kicker">Runs</p>
+                                        <ul>
+                                            <li>
+                                                <strong>Invoice sync</strong>
+                                                <span>Next 06:00 · 128 written</span>
+                                            </li>
+                                            <li>
+                                                <strong>Launch notice</strong>
+                                                <span>Idle · last Friday</span>
+                                            </li>
+                                            <li>
+                                                <strong>Friday report</strong>
+                                                <span>Next Friday 16:00</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                )
+                            }
                         </div>
                     </figure>
                 ))
@@ -287,13 +304,50 @@ const shots = [
         background: var(--surface);
     }
 
-    .shot-crop img {
-        width: 100%;
+    .board {
+        box-sizing: border-box;
         height: 100%;
-        object-fit: cover;
-        object-position: var(--focus, center);
-        transform: scale(var(--zoom, 1));
-        transform-origin: var(--focus, center);
+        padding: 0.9rem 0.85rem;
+        background: #f6f5f3;
+    }
+
+    .board-kicker {
+        margin: 0 0 0.65rem;
+        font-size: 0.66rem;
+        font-weight: 650;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+    }
+
+    .board ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+    }
+
+    .board li {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+        padding: 0.6rem 0.7rem;
+        border: 1px solid var(--rule);
+        border-radius: 10px;
+        background: #fff;
+    }
+
+    .board strong {
+        font-size: 0.8rem;
+        font-weight: 650;
+        letter-spacing: -0.015em;
+    }
+
+    .board span {
+        font-size: 0.7rem;
+        color: var(--muted);
     }
 
     .shot {

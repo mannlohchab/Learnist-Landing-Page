@@ -1,11 +1,11 @@
 ---
 const features = [
-	"Full learning system for one person",
-	"Lifetime product updates",
-	"Private workspace for lessons and labs",
-	"Works across AI IDEs and CLIs",
-	"Coaching that refuses to hand you answers",
-	"Progress that lives in your git history",
+	"Websites, designed and built",
+	"Apps and internal tools",
+	"Tech support after launch",
+	"Automation for the repetitive work",
+	"The same people from first call to the fix",
+	"A written scope before anyone starts",
 ];
 ---
 
@@ -13,34 +13,33 @@ const features = [
 	<header class="pricing-intro">
 		<p class="pricing-tag">Pricing</p>
 		<h1 id="pricing-heading" class="pricing-title">
-			One seat. Lifetime access.
+			Scoped to the work.
 		</h1>
 		<p class="pricing-lead">
-			Stop overpaying for courses you never finish. One payment covers the
-			whole system.
+			Websites, apps, support, and automation. One scope, written before
+			anyone starts.
 		</p>
 	</header>
 
-	<article class="plan" data-currency="inr">
+	<article class="plan" data-offer="websites">
 		<div class="plan-story">
 			<div class="plan-brand">
 				<img
 					class="plan-mark"
-					src="/learnist.webp"
-					alt=""
-					width="36"
-					height="36"
+					src="/kmos.png"
+					alt="kmos"
+					width="280"
+					height="100"
 				/>
-				<span class="plan-brand-name">Learnist</span>
 			</div>
 
 			<div class="plan-pitch">
-				<h2 class="plan-pitch-title">
-					Stop overpaying for courses you never finish.
+				<h2 class="plan-pitch-title" data-pitch-title>
+					A website that is finished, not a deck.
 				</h2>
-				<p class="plan-pitch-body">
-					One lifetime seat covers the whole system. No monthly drip.
-					No classroom lock-in.
+				<p class="plan-pitch-body" data-pitch-body>
+					Marketing sites and product sites, with the structure to
+					change them later.
 				</p>
 			</div>
 
@@ -66,45 +65,59 @@ const features = [
 					Why this plan?
 				</p>
 				<p class="plan-why-body">
-					Built for people with a day job. It fits your evenings, lives
-					in your editor, and compounds over years, not a subscription
-					that bills whether you show up or not.
+					The same people design the site, build the app, answer when
+					it breaks, and wire the work that should not need a person
+					every morning.
 				</p>
 			</aside>
 		</div>
 
 		<div class="plan-offer">
 			<div class="plan-highlight">
-				<p class="plan-label">Lifetime</p>
-				<h2 class="plan-name">Lifetime seat</h2>
-				<p class="plan-tagline">One person. Forever.</p>
+				<p class="plan-label" data-plan-label>Websites</p>
+				<h2 class="plan-name" data-plan-name>A site, shipped</h2>
+				<p class="plan-tagline" data-plan-tagline>Designed and built.</p>
 
-				<div
-					class="currency"
-					role="group"
-					aria-label="Currency"
-				>
-					<button
-						type="button"
-						class="currency-btn"
-						data-currency-btn="usd"
-						aria-pressed="false"
-					>
-						USD
-					</button>
+				<div class="currency" role="group" aria-label="Service">
 					<button
 						type="button"
 						class="currency-btn is-active"
-						data-currency-btn="inr"
+						data-offer-btn="websites"
 						aria-pressed="true"
 					>
-						INR
+						Sites
+					</button>
+					<button
+						type="button"
+						class="currency-btn"
+						data-offer-btn="apps"
+						aria-pressed="false"
+					>
+						Apps
+					</button>
+					<button
+						type="button"
+						class="currency-btn"
+						data-offer-btn="support"
+						aria-pressed="false"
+					>
+						Support
+					</button>
+					<button
+						type="button"
+						class="currency-btn"
+						data-offer-btn="automation"
+						aria-pressed="false"
+					>
+						Auto
 					</button>
 				</div>
 
 				<div class="plan-price" aria-live="polite">
-					<p class="plan-price-main" data-price-main>₹5,784</p>
-					<p class="plan-price-alt" data-price-alt>or $60 · one-time</p>
+					<p class="plan-price-main" data-price-main>Scoped</p>
+					<p class="plan-price-alt" data-price-alt>
+						priced to the pages, not a template
+					</p>
 				</div>
 			</div>
 
@@ -131,8 +144,8 @@ const features = [
 
 			<div class="plan-actions">
 				<a class="plan-btn plan-btn-ghost" href="#faq">Read FAQ</a>
-				<a class="plan-btn plan-btn-solid" href="#buy">
-					Buy lifetime
+				<a class="plan-btn plan-btn-solid" href="/start">
+					Start a project
 					<svg
 						class="plan-btn-arrow"
 						viewBox="0 0 16 16"
@@ -150,8 +163,8 @@ const features = [
 			</div>
 
 			<p class="plan-note">
-				You bring your own AI subscription. Learnist is the system that
-				runs on top of it.
+				Tell us what needs to exist. We'll say what it takes before
+				anyone starts.
 			</p>
 		</div>
 	</article>
@@ -247,15 +260,9 @@ const features = [
 
 	.plan-mark {
 		display: block;
-		width: 2rem;
-		height: 2rem;
+		height: 1.45rem;
+		width: auto;
 		object-fit: contain;
-	}
-
-	.plan-brand-name {
-		font-size: 1.05rem;
-		font-weight: 650;
-		letter-spacing: -0.02em;
 	}
 
 	.plan-pitch {
@@ -309,6 +316,7 @@ const features = [
 
 	.plan-pitch-title {
 		margin: 0;
+		transition: opacity 0.18s ease;
 		font-size: clamp(1.35rem, 2.4vw, 1.7rem);
 		line-height: 1.18;
 		letter-spacing: -0.03em;
@@ -318,6 +326,7 @@ const features = [
 
 	.plan-pitch-body {
 		margin: 0.7rem 0 0;
+		transition: opacity 0.18s ease;
 		font-size: 0.92rem;
 		line-height: 1.5;
 		color: var(--muted);
@@ -419,6 +428,7 @@ const features = [
 
 	.plan-label {
 		margin: 0;
+		transition: opacity 0.18s ease;
 		font-size: 0.7rem;
 		font-weight: 650;
 		letter-spacing: 0.1em;
@@ -428,6 +438,7 @@ const features = [
 
 	.plan-name {
 		margin: 0.35rem 0 0;
+		transition: opacity 0.18s ease;
 		font-size: clamp(1.55rem, 2.6vw, 1.85rem);
 		line-height: 1.1;
 		letter-spacing: -0.03em;
@@ -436,6 +447,7 @@ const features = [
 
 	.plan-tagline {
 		margin: 0.35rem 0 0;
+		transition: opacity 0.18s ease;
 		font-size: 0.95rem;
 		color: var(--muted);
 	}
@@ -485,10 +497,12 @@ const features = [
 
 	.plan-price-main {
 		margin: 0;
-		font-size: clamp(2.4rem, 5vw, 3.15rem);
+		font-family: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+		font-style: italic;
+		font-weight: 400;
+		font-size: clamp(2.6rem, 5vw, 3.4rem);
 		line-height: 1;
-		letter-spacing: -0.04em;
-		font-weight: 700;
+		letter-spacing: -0.03em;
 		transition: opacity 0.18s ease;
 	}
 
@@ -500,7 +514,12 @@ const features = [
 	}
 
 	.plan.is-switching .plan-price-main,
-	.plan.is-switching .plan-price-alt {
+	.plan.is-switching .plan-price-alt,
+	.plan.is-switching .plan-pitch-title,
+	.plan.is-switching .plan-pitch-body,
+	.plan.is-switching .plan-name,
+	.plan.is-switching .plan-tagline,
+	.plan.is-switching .plan-label {
 		opacity: 0.35;
 	}
 
@@ -653,35 +672,84 @@ const features = [
 </style>
 
 <script>
-	const prices = {
-		inr: { main: "₹5,784", alt: "or $60 · one-time" },
-		usd: { main: "$60", alt: "or ₹5,784 · one-time" },
+	const offers = {
+		websites: {
+			label: "Websites",
+			name: "A site, shipped",
+			tagline: "Designed and built.",
+			main: "Scoped",
+			alt: "priced to the pages, not a template",
+			pitchTitle: "A website that is finished, not a deck.",
+			pitchBody:
+				"Marketing sites and product sites, with the structure to change them later.",
+		},
+		apps: {
+			label: "Apps",
+			name: "Product software",
+			tagline: "For the job a site can't do.",
+			main: "Scoped",
+			alt: "priced to the product, not a seat",
+			pitchTitle: "An app for the work the website cannot hold.",
+			pitchBody:
+				"Internal tools and product software, built by the same people who make the site.",
+		},
+		support: {
+			label: "Support",
+			name: "Someone answers",
+			tagline: "After it is live.",
+			main: "Scoped",
+			alt: "a person who already knows the system",
+			pitchTitle: "Launch day is not goodbye.",
+			pitchBody:
+				"Tech support stays with the people who built it. When it breaks, someone who understands it picks up.",
+		},
+		automation: {
+			label: "Automation",
+			name: "It runs itself",
+			tagline: "The work that repeats.",
+			main: "Scoped",
+			alt: "priced to the job, not the hours it used to take",
+			pitchTitle: "The Monday task should not need a person.",
+			pitchBody:
+				"Syncs, notifications, and the moves between tools. If it has a schedule, it can run.",
+		},
 	} as const;
 
-	type Currency = keyof typeof prices;
+	type Offer = keyof typeof offers;
 
 	const plan = document.querySelector<HTMLElement>(".plan");
 	if (plan) {
 		const main = plan.querySelector<HTMLElement>("[data-price-main]");
 		const alt = plan.querySelector<HTMLElement>("[data-price-alt]");
+		const label = plan.querySelector<HTMLElement>("[data-plan-label]");
+		const name = plan.querySelector<HTMLElement>("[data-plan-name]");
+		const tagline = plan.querySelector<HTMLElement>("[data-plan-tagline]");
+		const pitchTitle = plan.querySelector<HTMLElement>("[data-pitch-title]");
+		const pitchBody = plan.querySelector<HTMLElement>("[data-pitch-body]");
 		const buttons = plan.querySelectorAll<HTMLButtonElement>(
-			"[data-currency-btn]",
+			"[data-offer-btn]",
 		);
 
-		function setCurrency(currency: Currency) {
+		function setOffer(offer: Offer) {
 			if (!plan || !main || !alt) return;
+			const next = offers[offer];
 
 			plan.classList.add("is-switching");
-			plan.dataset.currency = currency;
+			plan.dataset.offer = offer;
 
 			window.setTimeout(() => {
-				main.textContent = prices[currency].main;
-				alt.textContent = prices[currency].alt;
+				main.textContent = next.main;
+				alt.textContent = next.alt;
+				if (label) label.textContent = next.label;
+				if (name) name.textContent = next.name;
+				if (tagline) tagline.textContent = next.tagline;
+				if (pitchTitle) pitchTitle.textContent = next.pitchTitle;
+				if (pitchBody) pitchBody.textContent = next.pitchBody;
 				plan.classList.remove("is-switching");
 			}, 120);
 
 			buttons.forEach((btn) => {
-				const active = btn.dataset.currencyBtn === currency;
+				const active = btn.dataset.offerBtn === offer;
 				btn.classList.toggle("is-active", active);
 				btn.setAttribute("aria-pressed", active ? "true" : "false");
 			});
@@ -689,8 +757,8 @@ const features = [
 
 		buttons.forEach((btn) => {
 			btn.addEventListener("click", () => {
-				const next = btn.dataset.currencyBtn as Currency | undefined;
-				if (next && next in prices) setCurrency(next);
+				const next = btn.dataset.offerBtn as Offer | undefined;
+				if (next && next in offers) setOffer(next);
 			});
 		});
 	}

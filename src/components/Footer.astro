@@ -1,22 +1,23 @@
 ---
 const productLinks = [
 	{ label: "Why", href: "/#why" },
-	{ label: "How", href: "/#how" },
-	{ label: "Use Cases", href: "/#use-cases" },
+	{ label: "Work", href: "/product" },
+	{ label: "Services", href: "/#services" },
 	{ label: "Pricing", href: "/pricing" },
 ];
 
 const resourceLinks = [
 	{ label: "FAQ", href: "/pricing#faq" },
-	{ label: "Documentation", href: "#docs" },
-	{ label: "Guides", href: "#guides" },
-	{ label: "Support", href: "mailto:hello@learnist.dev" },
+	{ label: "Websites", href: "/#services" },
+	{ label: "Apps", href: "/#services" },
+	{ label: "Support", href: "mailto:kmos.support@gmail.com" },
 ];
 
 const companyLinks = [
-	{ label: "About", href: "#about" },
-	{ label: "Contact", href: "mailto:hello@learnist.dev" },
-	{ label: "Partners", href: "#partners" },
+	{ label: "About", href: "/#why" },
+	{ label: "Contact", href: "mailto:kmos.support@gmail.com" },
+	{ label: "Grievance", href: "/grievance" },
+	{ label: "Automation", href: "/#services" },
 ];
 ---
 
@@ -37,17 +38,15 @@ const companyLinks = [
 					<a class="footer-logo" href="/">
 						<img
 							class="footer-mark"
-							src="/learnist.webp"
-							alt=""
-							width="36"
-							height="36"
+							src="/kmos.png"
+							alt="kmos"
+							width="280"
+							height="100"
 						/>
-						<span class="footer-name">Learnist</span>
 					</a>
 					<p class="footer-desc">
-						Learnist helps engineers become the ones AI can't
-						replace — byte-sized lessons and labs that run inside
-						the editor you already use.
+						kmos is a software collective. We make websites and
+						apps, then stay for tech support and automation.
 					</p>
 				</div>
 
@@ -95,7 +94,7 @@ const companyLinks = [
 
 			<div class="footer-bottom">
 				<p class="footer-copy">
-					©2026 LEARNIST. All rights reserved.
+					©2026 KMOS. All rights reserved.
 				</p>
 				<div class="footer-legal">
 					<a href="#terms">Terms of Service</a>
@@ -180,18 +179,12 @@ const companyLinks = [
 
 	.footer-mark {
 		display: block;
-		width: 2rem;
-		height: 2rem;
+		height: 1.35rem;
+		width: auto;
+		padding: 0.45rem 0.65rem;
 		border-radius: 0.45rem;
 		background: #fff;
-		object-fit: cover;
-	}
-
-	.footer-name {
-		font-size: 1.05rem;
-		font-weight: 700;
-		letter-spacing: -0.02em;
-		text-shadow: 0 1px 8px rgb(0 20 60 / 0.45);
+		object-fit: contain;
 	}
 
 	.footer-desc {
