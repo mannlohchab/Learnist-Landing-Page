@@ -1,0 +1,1 @@
+ALTER TABLE inquiries ADD COLUMN kind TEXT NOT NULL DEFAULT 'project';

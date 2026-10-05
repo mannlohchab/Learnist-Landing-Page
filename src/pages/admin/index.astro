@@ -1,0 +1,193 @@
+---
+export const prerender = false;
+
+import { loadInquiries } from "../../lib/store";
+import Layout from "../../layouts/Layout.astro";
+
+let inquiries: Awaited<ReturnType<typeof loadInquiries>> = [];
+let failed = false;
+
+try {
+	inquiries = await loadInquiries();
+} catch (err) {
+	console.error("inquiry list failed", err);
+	failed = true;
+}
+
+const when = new Intl.DateTimeFormat("en-GB", {
+	dateStyle: "medium",
+	timeStyle: "short",
+	timeZone: "UTC",
+});
+---
+
+<Layout title="Requests — kmos">
+	<meta slot="head" name="robots" content="noindex" />
+	<main class="admin">
+		<header class="bar">
+			<a class="brand" href="/">
+				<img src="/kmos.png" alt="kmos" width="280" height="100" />
+			</a>
+			<p>Requests</p>
+		</header>
+
+		{
+			failed ? (
+				<p class="empty">The request list didn't load.</p>
+			) : inquiries.length === 0 ? (
+				<p class="empty">No requests yet.</p>
+			) : (
+				<ul class="list">
+					{inquiries.map((item) => (
+						<li>
+							<div class="meta">
+								<span class="who">
+									<span class={`tag tag-${item.kind}`}>
+										{item.kind === "grievance"
+											? "Grievance"
+											: "Project"}
+									</span>
+									<a href={`tel:${item.phone}`}>{item.phone}</a>
+								</span>
+								<time datetime={item.createdAt}>
+									{when.format(new Date(item.createdAt))} UTC
+								</time>
+							</div>
+							<p>{item.query}</p>
+						</li>
+					))}
+				</ul>
+			)
+		}
+	</main>
+</Layout>
+
+<style>
+	.admin {
+		min-height: 100%;
+		box-sizing: border-box;
+		padding: 1.5rem;
+		background: #f7f6f4;
+		color: #14110f;
+		font-family:
+			"Inter",
+			ui-sans-serif,
+			system-ui,
+			-apple-system,
+			"Segoe UI",
+			sans-serif;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	.bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		max-width: 40rem;
+		margin: 0 auto 1.25rem;
+	}
+
+	.brand img {
+		display: block;
+		height: 1.45rem;
+		width: auto;
+	}
+
+	.bar p {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 650;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #0000ff;
+	}
+
+	.empty,
+	.list {
+		max-width: 40rem;
+		margin: 0 auto;
+	}
+
+	.empty {
+		padding: 1.25rem;
+		border: 1px solid #e6e3df;
+		border-radius: 14px;
+		background: #fff;
+		color: #5f5a55;
+	}
+
+	.list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		padding: 0;
+		list-style: none;
+	}
+
+	.list li {
+		padding: 1rem 1.1rem 1.1rem;
+		border: 1px solid #e6e3df;
+		border-radius: 14px;
+		background: #fff;
+	}
+
+	.meta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 0.35rem 1rem;
+	}
+
+	.who {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.45rem 0.6rem;
+	}
+
+	.tag {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.16rem 0.45rem;
+		border-radius: 999px;
+		font-size: 0.62rem;
+		font-weight: 650;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.tag-project {
+		color: #0000dd;
+		background: #ececff;
+	}
+
+	.tag-grievance {
+		color: #9a3412;
+		background: #fff1e8;
+	}
+
+	.meta a {
+		color: #14110f;
+		font-weight: 650;
+		letter-spacing: -0.02em;
+		text-decoration: none;
+	}
+
+	.meta a:hover {
+		color: #0000ff;
+	}
+
+	time {
+		font-size: 0.75rem;
+		color: #5f5a55;
+	}
+
+	.list p {
+		margin: 0.55rem 0 0;
+		font-size: 0.95rem;
+		line-height: 1.5;
+		white-space: pre-wrap;
+	}
+</style>

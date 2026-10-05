@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS inquiries (
+	id TEXT PRIMARY KEY,
+	phone TEXT NOT NULL,
+	query TEXT NOT NULL,
+	created_at TEXT NOT NULL
+);
