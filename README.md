@@ -1,46 +1,39 @@
-# Astro Starter Kit: Basics
+# kmos
+
+Landing site for kmos, a software collective. Websites, apps, tech support, and automation.
+
+The visual system is unchanged from the original layout. Copy, name, and logo are kmos.
+
+## Commands
+
+| Command | Action |
+| :------ | :----- |
+| `bun install` | Install dependencies |
+| `bun dev` | Local dev server |
+| `bun build` | Static build to `./dist/` |
+| `bun run deploy` | Build, then deploy the static site to Cloudflare Workers |
+
+## Cloudflare Workers
+
+Marketing pages are prerendered. The request form and `/admin` run on the Worker and store rows in D1 (`DB`).
+
+Local admin login is in `.env` (dev) and `.dev.vars` (Workers), neither committed:
+
+```
+ADMIN_USER=kmos
+ADMIN_PASSWORD=choose-a-password
+```
+
+`bun dev` stores requests in `.data/inquiries.json`. The Worker build stores them in D1.
+
+Before a real deploy, create the database, put its id in `wrangler.jsonc`, and set the same two names as secrets:
 
 ```sh
-bun create astro@latest -- --template basics
+bunx wrangler d1 create kmos-inquiries
+bunx wrangler d1 execute kmos-inquiries --remote --file=migrations/0001_inquiries.sql
+bunx wrangler secret put ADMIN_USER
+bunx wrangler secret put ADMIN_PASSWORD
+bun run deploy
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+`/admin` asks for that username and password. Requests are not linked from the public site.
